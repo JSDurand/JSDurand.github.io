@@ -12,4 +12,11 @@ Maybe the English version will come out later, just maybe...
 
 followed by opening the file `index.html` within the directory.
 
+# Screen Shots
+
+![alt tag](https://github.com/JSDurand/little-javascript-bricks-game/screenshots/first.png)
+![alt tag](https://github.com/JSDurand/little-javascript-bricks-game/screenshots/second.png)
+![alt tag](https://github.com/JSDurand/little-javascript-bricks-game/screenshots/third.png)
+![alt tag](https://github.com/JSDurand/little-javascript-bricks-game/screenshots/fourth.png)
+
 # Have Fun!
