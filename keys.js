@@ -67,11 +67,12 @@ function keyPressed() {
       mygame.startover();
     } else if (mygame.envs.playAnimeOrNot) {
       mygame.envs.playAnimeOrNot = false;
+      mygame.envs.timing = 0;
       mygame.envs.animeNo = 0;
     } else {
       if (mygame.envs.level <= mygame.envs.maxLevel) {
         if (mygame.envs.bricks.length !== 0) {
-          mygame.player.life = mygame.player.life <= 0 ? mygame.player.life : 1;
+          // mygame.player.life = mygame.player.life <= 0 ? mygame.player.life : 1;
           alert('\u8B66\u544A:\u4E0D\u8981\u4E82\u4F86!')
         } else {
            if (mygame.envs.level < mygame.envs.maxLevel) {

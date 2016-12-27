@@ -13,7 +13,7 @@ Maybe the English version will come out later, just maybe...
 
 # Usage?
 
-`git clone https://github.com/JSDurand/little-javascript-bricks-game.git`
+`git clone https://github.com/JSDurand/JSDurand.github.io`
 
 followed by opening the file `index.html` within the directory.
 
