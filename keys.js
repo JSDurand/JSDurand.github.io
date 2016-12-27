@@ -153,7 +153,7 @@ function keyPressed() {
 
   if (key === 'D') {
     if (mygame.envs.intro) {return;}
-    var val = prompt('\u8F38\u5165\u5BC6\u78BC', '\u4F10\u4F10\u4F10\u4F10\u4F10\u6728\u5DE5');
+    var val = prompt('\u4f60\u89ba\u5f97\u594e\u4f51\u5e25\u55ce\uff1f', '\u4F10\u4F10\u4F10\u4F10\u4F10\u6728\u5DE5');
     if (val === '\u6211\u89ba\u5f97\u594e\u4f51\u5f88\u5e25') {
       mygame.player.width     = width * 6;
       mygame.player.halfWidth = width * 3;

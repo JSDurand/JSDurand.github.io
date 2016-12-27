@@ -37,7 +37,9 @@ function startInterface () {
   textSize(40);
   text('\u8f38\u5165\u9375', xcenter+50, ycenter-40);
   text('\u555f\u52d5',xcenter+50,ycenter+50);
-
+  textSize(30);
+  text('\u6309\uff33\u66ab\u505c',xcenter-20,ycenter-100)
+  text('\u6309\uff2d\u8df3\u95dc',xcenter-20,ycenter+100);
   // text('\u76e1\n\u60c5\n\u73a9', xcenter+50, ycenter-80);
   // text('Let us break bricks!\nPress r to start!\nPress n to see this again!\nAnd press k to launch bullets!', xcenter, ycenter - 75);
   textAlign(LEFT);
