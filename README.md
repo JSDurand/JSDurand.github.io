@@ -1,3 +1,8 @@
+# Important notice:
+This is the newest page of my little javascript bricks game.
+Enjoy it.
+To play the game without downloading it, go to [the github pages](JSDurand.github.io)
+
 # What is this?
 
 This is a little game to break bricks, written in javascript and p5.js.
