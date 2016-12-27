@@ -118,6 +118,7 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       break;
     case 7:
       mygame.envs.animeNo = 1;
+      mygame.envs.timing = 0;
       mygame.envs.playAnimeOrNot = true;
       var baseH = height/5;
       mygame.clear();

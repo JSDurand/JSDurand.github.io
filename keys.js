@@ -67,8 +67,8 @@ function keyPressed() {
       mygame.startover();
     } else if (mygame.envs.playAnimeOrNot) {
       mygame.envs.playAnimeOrNot = false;
-      mygame.envs.timing = 0;
-      mygame.envs.animeNo = 0;
+      mygame.envs.timing         = 0;
+      mygame.envs.animeNo        = 0;
     } else {
       if (mygame.envs.level <= mygame.envs.maxLevel) {
         if (mygame.envs.bricks.length !== 0) {
