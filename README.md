@@ -1,7 +1,7 @@
 # Important notice:
 This is the newest page of my little javascript bricks game.
 Enjoy it.
-To play the game without downloading it, go to [the github pages](JSDurand.github.io)
+To play the game without downloading it, go to [the github pages](http://JSDurand.github.io)
 
 # What is this?
 
