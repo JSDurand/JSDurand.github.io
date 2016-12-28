@@ -48,6 +48,7 @@ function pill(x, y, effect) {
           break;
         default:
           console.log('EFFECT NOT IMPLEMENTED: ' + this.effect);
+          break;
       }
     };
 

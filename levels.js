@@ -140,6 +140,37 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       // invbrick_one.invisible = true;
       // mygame.envs.bricks.push(invbrick_one);
       break;
+    case 8:
+      var baseH = height/5;
+      var startPos = width/5 -25;
+      mygame.clear();
+      var temp = brick(width/3, height/3,hBaseSize, vBaseSize, 0.9);
+      temp.invisible = true;
+
+      for (var i = 1; i < 6; i++) {
+        mygame.envs.bricks.push(brick(startPos+mysize*i, baseH, hBaseSize, vBaseSize, 0.5+i/10));
+        mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 200, hBaseSize, vBaseSize, 0.5+i/10));
+      }
+      
+      // for (var i = 1; i < 3; i++) {
+       // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 50, hBaseSize, vBaseSize, 0.9, 1000, 100));
+       // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 150, hBaseSize, vBaseSize, 0.9, 1000, 100));
+       // mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 100, hBaseSize, vBaseSize, 0.9));
+      // }
+       
+      /*
+       * mygame.envs.unbreakables.push(unbrick(startPos+3*mysize, baseH+50, hBaseSize, vBaseSize, 0.9, 1500, 150))
+       * mygame.envs.unbreakables.push(unbrick(startPos+3*mysize, baseH+150, hBaseSize, vBaseSize, 0.9, 1500, 150))
+       */
+      // mygame.envs.bricks.push(pill(startPos+mysize*3, baseH + 100, 'ENLARGE'));
+      // for (var i = 4; i < 6; i++) {
+        // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 50, hBaseSize, vBaseSize, 0.9, 1500, 100));
+        // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 150, hBaseSize, vBaseSize, 0.9, 1500, 100));
+        // mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 100, hBaseSize, vBaseSize, 0.9));
+      // }
+      mygame.envs.bricks.push(bomb(width/2-25, height/2-110, 50));
+      mygame.envs.bricks.push(temp);
+      break;
     case 0:
       mygame.player.width = width * 6;
       mygame.player.halfWidth = width * 3;
@@ -159,7 +190,8 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       // invbrick_three.invisible = true;
       // invbrick_four.invisible = true;
       mygame.envs.bricks.push(invbrick_one);
-      mygame.envs.obs.push(obstacles(width/2-20, height/2-50, 100, 40, 1.1));
+      mygame.envs.bricks.push(bomb(width*2/3, height*2/3, 50));
+      // mygame.envs.obs.push(obstacles(width/2-20, height/2-50, 100, 40, 1.1));
       // mygame.envs.bricks.push(invbrick_two);
       // mygame.envs.bricks.push(invbrick_three);
       // mygame.envs.bricks.push(invbrick_four);
@@ -198,6 +230,7 @@ mygame.clear = function () {
   mygame.envs.pills = [];
   mygame.envs.blacks = [];
   mygame.envs.whites = [];
+  mygame.envs.obs = [];
   mygame.player.life = mygame.envs.defaultLife;
   mygame.player.width = width/6;
   mygame.player.halfWidth = mygame.player.width/2;

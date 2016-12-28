@@ -9,7 +9,7 @@ mygame.envs = {
   gravity : 0.02,
   coefficientWal : 1.1,
   maximum : 15,
-  maxLevel : 7,
+  maxLevel : 8,
   maxAttained : false,
   start : false,
   intro : true,
@@ -28,6 +28,19 @@ mygame.envs = {
   animeNo : 0,
   hittedArray : []
 };
+
+/*
+ * function preload() {
+ *   myfont = loadFont('Georgia',fontReady);
+ *   myfont = loadFont('./DFLIYX1B.TTF');
+ * }
+ */
+
+/*
+ * function fontReady (font) {
+ *   textFont(font);
+ * }
+ */
 
 function setup () {
   mygame.can = createCanvas(1000,700);
