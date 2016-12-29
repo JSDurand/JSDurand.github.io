@@ -23,7 +23,7 @@ function bomb(x, y, radius) {
       bullet.eaten   = false;
 
       bullet.representation = function() {
-        fill('#e07f18');
+        fill('#075ef4');
         ellipse(this.x, this.y, this.radius, this.radius);
       }
 

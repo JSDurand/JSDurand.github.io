@@ -72,6 +72,11 @@ mygame.playAnime = function () {
     textAlign(LEFT);
     mygame.envs.timing++;
     return;
+  } else if (mygame.envs.animeNo === 2) {
+    mygame.twoAnime(timingRate, invRate, firstCri, secondCri, thirdCri);
+    textAlign(LEFT);
+    mygame.envs.timing++;
+    return;
   }
   text('\u5728\u5f88\u4e45\u5f88\u4e45\u4ee5\u524d',width/2,height*invRate);
   if (mygame.envs.timing > firstCri) {
@@ -153,3 +158,28 @@ mygame.oneAnime = function(timingRate, invRate, firstCri, secondCri, thirdCri) {
   }
 }
 
+mygame.twoAnime = function(timingRate, invRate, firstCri, secondCri, thirdCri) {
+  text('\u70ba\u4e86\u61c9\u5c0d\u6a5f\u5668\u4eba\u7684\u9032\u653b\uff0c\u5927\u5bb6\u5408\u8cc7\u8cfc\u8cb7\u4e86\u4e00\u9846\u70b8\u5f48\uff01',width/2,height*invRate);
+
+  if (mygame.envs.timing > firstCri) {
+    var oneTime = mygame.envs.timing - firstCri;
+    var oneRate = (oneTime < 200) ? oneTime / 200 : 1;
+    oneRate = 1 - oneRate;
+    textSize(60 * oneRate);
+    text('\u76f8\u4fe1\u6a5f\u5668\u4eba\u6703\u843d\u8352\u800c\u9003\u7684\uff01',width/2,height*oneRate);
+  }
+  if (mygame.envs.timing > secondCri) {
+    oneTime = mygame.envs.timing - secondCri;
+    oneRate = (oneTime < 200) ? oneTime / 200 : 1;
+    oneRate = 1 - oneRate;
+    textSize(60 * oneRate);
+    text('\u9019\u662f\u78da\u584a\u570b\u7684\u5bbf\u547d\u8207\u69ae\u8000',width/2,height*oneRate);
+  }
+  if (mygame.envs.timing > thirdCri) {
+    oneTime = mygame.envs.timing - thirdCri;
+    oneRate = (oneTime < 200) ? oneTime / 200 : 1;
+    oneRate = 1 - oneRate;
+    textSize(60 * oneRate);
+    text('\u4e00\u5207\u90fd\u662f\u70ba\u4e86\u78da\u584a\uff01', width/2, height*oneRate);
+  }
+}

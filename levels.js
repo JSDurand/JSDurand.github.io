@@ -141,35 +141,28 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       // mygame.envs.bricks.push(invbrick_one);
       break;
     case 8:
+      mygame.envs.animeNo = 2;
+      mygame.envs.timing = 0;
+      mygame.envs.playAnimeOrNot = true;
       var baseH = height/5;
       var startPos = width/5 -25;
       mygame.clear();
-      var temp = brick(width/3, height/3,hBaseSize, vBaseSize, 0.9);
-      temp.invisible = true;
+      // var temp = brick(width/3, height/3, hBaseSize, vBaseSize, 0.9);
+      // temp.invisible = true;
+      var ob_one = obstacles(width/3, height/3, hBaseSize, vBaseSize, 1.2);
+      var ob_two = obstacles(width*2/3, height/3, hBaseSize, vBaseSize, 1.2);
+      ob_one.radius = 60;
+      ob_two.radius = 60;
 
       for (var i = 1; i < 6; i++) {
         mygame.envs.bricks.push(brick(startPos+mysize*i, baseH, hBaseSize, vBaseSize, 0.5+i/10));
         mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 200, hBaseSize, vBaseSize, 0.5+i/10));
       }
       
-      // for (var i = 1; i < 3; i++) {
-       // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 50, hBaseSize, vBaseSize, 0.9, 1000, 100));
-       // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 150, hBaseSize, vBaseSize, 0.9, 1000, 100));
-       // mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 100, hBaseSize, vBaseSize, 0.9));
-      // }
-       
-      /*
-       * mygame.envs.unbreakables.push(unbrick(startPos+3*mysize, baseH+50, hBaseSize, vBaseSize, 0.9, 1500, 150))
-       * mygame.envs.unbreakables.push(unbrick(startPos+3*mysize, baseH+150, hBaseSize, vBaseSize, 0.9, 1500, 150))
-       */
-      // mygame.envs.bricks.push(pill(startPos+mysize*3, baseH + 100, 'ENLARGE'));
-      // for (var i = 4; i < 6; i++) {
-        // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 50, hBaseSize, vBaseSize, 0.9, 1500, 100));
-        // mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 150, hBaseSize, vBaseSize, 0.9, 1500, 100));
-        // mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 100, hBaseSize, vBaseSize, 0.9));
-      // }
       mygame.envs.bricks.push(bomb(width/2-25, height/2-110, 50));
-      mygame.envs.bricks.push(temp);
+      // mygame.envs.bricks.push(temp);
+      mygame.envs.obs.push(ob_one);
+      mygame.envs.obs.push(ob_two);
       break;
     case 0:
       mygame.player.width = width * 6;
