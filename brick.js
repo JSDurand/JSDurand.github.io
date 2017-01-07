@@ -3,6 +3,7 @@ function brick(x, y, hsize, vsize, coe) {
   newBrick.init(hsize, vsize, mygame.constants.elastic, mygame.constants.basic);
 
   newBrick.setPos(x, y);
+  newBrick.off = false;
   newBrick.representation = function () {
     fill(0,255,0);
     rect(this.x, this.y, this.width, this.height);
@@ -16,6 +17,30 @@ function brick(x, y, hsize, vsize, coe) {
    *   newBrick.ballHits[i] = false;
    * }
    */
+
+  return newBrick;
+}
+
+function falling_brick(x, y, hsize, vsize, coe) {
+  var newBrick = Object.create(mygame.objects);
+  newBrick.init(hsize, vsize, mygame.constants.elastic, mygame.constants.basic);
+
+  newBrick.setPos(x, y);
+  newBrick.representation = function () {
+    fill(0,255,0);
+    rect(this.x, this.y, this.width, this.height);
+  }
+  newBrick.off = false;
+  newBrick.updatePos = function() {
+    this.vy += mygame.envs.gravity;
+    this.y  += this.vy;
+
+    if (this.y > height) {
+      this.off = true;
+    }
+  }
+
+  newBrick.ballHits = [];
 
   return newBrick;
 }

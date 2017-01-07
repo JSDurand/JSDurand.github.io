@@ -159,10 +159,19 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
         mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 200, hBaseSize, vBaseSize, 0.5+i/10));
       }
       
-      mygame.envs.bricks.push(bomb(width/2-25, height/2-110, 50));
+      mygame.envs.bricks.push(bomb(width/2-25, height/2-140, 50));
       // mygame.envs.bricks.push(temp);
       mygame.envs.obs.push(ob_one);
       mygame.envs.obs.push(ob_two);
+      break;
+    case 8.5:
+      mygame.envs.animeNo = 3;
+      mygame.envs.timing = 0;
+      mygame.envs.playAnimeOrNot = true;
+      var baseH = height/5;
+      var startPos = width/5 -25;
+      mygame.clear();
+      mygame.envs.bricks.push(falling_brick(width/2-hBaseSize/2, 20, hBaseSize, vBaseSize, 0.9));
       break;
     case 0:
       mygame.player.width = width * 6;
@@ -197,7 +206,7 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
         // mygame.envs.unbreakables.push(unbrick(startx+i*stepx, starty+4*stepx, stepx, stepy, 0.9, -1500, 100));
       // }
     default:
-      console.log("not implemented");
+      console.log('NOT IMPLEMENTED!');
       break;
   }
 }

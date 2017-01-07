@@ -14,6 +14,7 @@ function bomb(x, y, radius) {
     this.magnetRange = 100;
     this.charged = true;
     this.eject = function () {};
+    this.representation = function () {};
     setTimeout(function() {thisBomb.invisible = false;}, 1000);
     for (var i = 0; i < 30; i++) {
       var bullet = ball(this.midX() + newBomb.radius * cos(i*12), this.midY() + newBomb.radius*sin(i*12), 15, 0, 0);

@@ -23,7 +23,7 @@ function keyPressed() {
     mygame.envs.superDuper = false;
 
     var val = prompt('\u9078\u64C7\u95DC\u5361', mygame.envs.maxLevel);
-    if (isNaN(parseInt(val))) {return;}
+    if (isNaN(parseFloat(val))) {return;}
 
     mygame.player.life = mygame.envs.defaultLife;
     mygame.envs.playAnimeOrNot = false;
@@ -36,7 +36,7 @@ function keyPressed() {
     mygame.envs.obs          = [];
     mygame.envs.whites       = [];
     mygame.envs.unbreakables = [];
-    mygame.envs.level = parseInt(val);
+    mygame.envs.level = parseFloat(val);
     mygame.envs.maxAttained = false;
     mygame.envs.intro = false;
     mygame.envs.start = true;
@@ -78,7 +78,7 @@ function keyPressed() {
            if (mygame.envs.level < mygame.envs.maxLevel) {
              mygame.player.life = mygame.envs.defaultLife;
              mygame.envs.start = true;
-             mygame.envs.level++;
+             mygame.envs.level += (mygame.envs.level === 8 || mygame.envs.level === 8.5) ? .5 : 1;
            } else {
              mygame.envs.start = true;
              mygame.envs.maxAttained = true;
@@ -148,7 +148,7 @@ function keyPressed() {
 
   if (key === 'V') {
     if (mygame.envs.intro) {return;}
-      mygame.envs.superDuper  = true;
+      mygame.envs.superDuper = !mygame.envs.superDuper;
   }
 
   if (key === 'D') {

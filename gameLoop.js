@@ -47,6 +47,7 @@ function gameLoop () {
   mygame.motif(mygame.player, mygame.envs.balls);
   mygame.motif(mygame.player, mygame.envs.pills);
   mygame.ball_collide(mygame.envs.balls);
+  mygame.check_bricks(mygame.envs.bricks);
 
   mygame.collidables = mygame.envs.bricks.concat(mygame.envs.pills, mygame.envs.balls, mygame.envs.unbreakables, mygame.envs.blacks, mygame.envs.whites, mygame.envs.obs);
 

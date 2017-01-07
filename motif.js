@@ -123,6 +123,7 @@ mygame.objects = {
 
 mygame.nonEmptyHom = function (obj1, obj2) {
   // We assume X is always a ball, and Y is always a rectangle.
+
   if (obj1.shape === mygame.constants.smallBall) {
     if (obj1.invisible) {
       if (obj1.y < mygame.player.upper()) {return false;}
@@ -451,4 +452,11 @@ mygame.ball_collide = function (balls_list) {
       }
     }
   }
+}
+
+mygame.check_bricks = function (bricks_list) {
+  var l = bricks_list.length;
+  for (var i = l - 1; i > -1; i--)
+    if (bricks_list[i].off)
+      mygame.player.life = 0;
 }

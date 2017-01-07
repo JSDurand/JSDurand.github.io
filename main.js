@@ -9,7 +9,7 @@ mygame.envs = {
   gravity : 0.02,
   coefficientWal : 1.1,
   maximum : 15,
-  maxLevel : 8,
+  maxLevel : 9,
   maxAttained : false,
   start : false,
   intro : true,
@@ -26,6 +26,8 @@ mygame.envs = {
   timing : 0,
   itemNo : 0,
   animeNo : 0,
+  hBaseSize : 50,
+  vBaseSize : 25,
   hittedArray : []
 };
 
@@ -43,7 +45,7 @@ mygame.envs = {
  */
 
 function setup () {
-  mygame.can = createCanvas(1000,700);
+  mygame.can = createCanvas(windowWidth, windowHeight);
   mygame.centerCanvas();
 
   mygame.player = myPlayer();

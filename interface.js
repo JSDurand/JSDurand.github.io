@@ -31,15 +31,15 @@ function startInterface () {
   textSize(30);
   textAlign(CENTER);
   // text('ENTER', xcenter-100, ycenter-100);
-  text('\uFF2A \u8df3\u8e8d', xcenter-100, ycenter-50);
-  text(' \uFF2B\u767C\u5C04', xcenter-100, ycenter);
-  text(' N \u91CD\u4F86', xcenter-100, ycenter+50);
+  text('\uFF2A \u8df3\u8e8d', xcenter-100, ycenter-50-50);
+  text(' \uFF2B\u767C\u5C04', xcenter-100, ycenter-50);
+  text(' N \u91CD\u4F86', xcenter-100, ycenter+50-50);
   textSize(40);
-  text('\u8f38\u5165\u9375', xcenter+50, ycenter-40);
-  text('\u555f\u52d5',xcenter+50,ycenter+50);
+  text('\u8f38\u5165\u9375', xcenter+50, ycenter-40-50);
+  text('\u555f\u52d5',xcenter+50,ycenter+50-50);
   textSize(30);
-  text('\u6309\uff33\u66ab\u505c',xcenter-20,ycenter-100)
-  text('\u6309\uff2d\u8df3\u95dc',xcenter-20,ycenter+100);
+  text('\u6309\uff33\u66ab\u505c',xcenter-20,ycenter-100-50)
+  text('\u6309\uff2d\u8df3\u95dc',xcenter-20,ycenter+100-50);
   // text('\u76e1\n\u60c5\n\u73a9', xcenter+50, ycenter-80);
   // text('Let us break bricks!\nPress r to start!\nPress n to see this again!\nAnd press k to launch bullets!', xcenter, ycenter - 75);
   textAlign(LEFT);
@@ -74,6 +74,11 @@ mygame.playAnime = function () {
     return;
   } else if (mygame.envs.animeNo === 2) {
     mygame.twoAnime(timingRate, invRate, firstCri, secondCri, thirdCri);
+    textAlign(LEFT);
+    mygame.envs.timing++;
+    return;
+  } else if (mygame.envs.animeNo === 3) {
+    mygame.threeAnime(timingRate, invRate, firstCri, secondCri, thirdCri);
     textAlign(LEFT);
     mygame.envs.timing++;
     return;
@@ -181,5 +186,31 @@ mygame.twoAnime = function(timingRate, invRate, firstCri, secondCri, thirdCri) {
     oneRate = 1 - oneRate;
     textSize(60 * oneRate);
     text('\u4e00\u5207\u90fd\u662f\u70ba\u4e86\u78da\u584a\uff01', width/2, height*oneRate);
+  }
+}
+
+mygame.threeAnime = function(timingRate, invRate, firstCri, secondCri, thirdCri) {
+  text('\u4f60\u4ee5\u70ba\u7d50\u675f\u4e86\u55ce\uff1f\u592a\u5929\u771f\u60f9\uff01',width/2,height*invRate);
+
+  if (mygame.envs.timing > firstCri) {
+    var oneTime = mygame.envs.timing - firstCri;
+    var oneRate = (oneTime < 200) ? oneTime / 200 : 1;
+    oneRate = 1 - oneRate;
+    textSize(60 * oneRate);
+    text('\u6a5f\u5668\u4eba\u638c\u63e1\u4e86\u6700\u65b0\u79d1\u6280\uff0c\u8b93\u78da\u584a\u6389\u4e0b\u4f86\u4e86\uff01',width/2,height*oneRate);
+  }
+  if (mygame.envs.timing > secondCri) {
+    oneTime = mygame.envs.timing - secondCri;
+    oneRate = (oneTime < 200) ? oneTime / 200 : 1;
+    oneRate = 1 - oneRate;
+    textSize(60 * oneRate);
+    text('\u5728\u6253\u78da\u584a\u524d\uff0c\u5148\u9003\u547d\u53bb\u5427\uff5e\uff01',width/2,height*oneRate);
+  }
+  if (mygame.envs.timing > thirdCri) {
+    oneTime = mygame.envs.timing - thirdCri;
+    oneRate = (oneTime < 200) ? oneTime / 200 : 1;
+    oneRate = 1 - oneRate;
+    textSize(60 * oneRate);
+    text('\u60f3\u8fa6\u6cd5\u7e7c\u7e8c\u73a9\u5427\uff0c\u557e\u54aa \u003e\u002e\u005e', width/2, height*oneRate);
   }
 }
