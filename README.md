@@ -15,7 +15,7 @@ followed by opening the file `index.html` within the directory.
 
 # Screen Shots
 
-![alt tag](https://github.com/JSDurand/little-javascript-bricks-game/blob/master/screenshots/first.png)
-![alt tag](https://github.com/JSDurand/little-javascript-bricks-game/blob/master/screenshots/second.png)
+![alt tag](https://github.com/JSDurand/JSDurand.github.io/blob/master/screenshots/first.png)
+![alt tag](https://github.com/JSDurand/JSDurand.github.io/blob/master/screenshots/second.png)
 
 # Have Fun!
