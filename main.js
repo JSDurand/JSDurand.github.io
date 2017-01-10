@@ -1,88 +1,50 @@
-var mygame = {};
-
-mygame.envs = {
-  balls : [],
-  pills : [],
-  bricks : [],
-  level : 0,
-  defaultLife : 10,
-  gravity : 0.02,
-  coefficientWal : 1.1,
-  maximum : 15,
-  maxLevel : 9,
-  maxAttained : false,
-  start : false,
-  intro : true,
-  bigRadius : 40,
-  superDuper : true, // controls super duper behaviour
-  unbreakables : [],
-  blacks : [],
-  whites : [],
-  obs : [],
-  finishExplain : false,
-  randomAgain : false,
-  timeStop : false,
-  playAnimeOrNot : false,
-  timing : 0,
-  itemNo : 0,
-  animeNo : 0,
-  hBaseSize : 50,
-  vBaseSize : 25,
-  hittedArray : []
-};
-
 /*
- * function preload() {
- *   myfont = loadFont('Georgia',fontReady);
- *   myfont = loadFont('./DFLIYX1B.TTF');
- * }
+ * Bricks game ... or not.
  */
 
-/*
- * function fontReady (font) {
- *   textFont(font);
- * }
- */
+var app = new p2.WebGLRenderer(function(){
+  mon_jeu.monde = new p2.World({
+    gravity : [0,-5]
+  });
+  this.setWorld(mon_jeu.monde);
 
-function setup () {
-  mygame.can = createCanvas(windowWidth, windowHeight);
-  mygame.centerCanvas();
+  var ground_mat = new p2.Material();
+  var ball_mat   = new p2.Material();
 
-  mygame.player = myPlayer();
+  // Contact
+  var ground_ball_contact = new p2.ContactMaterial(ground_mat, ball_mat,
+    {friction: 30});
 
-  mygame.envs.mysize = width/10;
-  mygame.envs.diff = height/10;
-  mygame.envs.vshift = height/3 - mygame.constants.defaultWidth/2;
-  mygame.envs.hshift = width/3 - mygame.constants.defaultHeight/2;
+  mon_jeu.monde.addContactMaterial(ground_ball_contact);
 
-  setTimeout(randoming, 1500);
-  angleMode(DEGREES);
-}
+  // Add ground
+  var ground_body = new p2.Body({ position: [0, -1] });
+  ground_body.addShape(new p2.Plane({ material: ground_mat }));
+  mon_jeu.monde.addBody(ground_body);
 
-function draw() {
-  if (mygame.envs.intro) {
-    startInterface();
-  } else if (mygame.envs.bricks.length == 0) {
-    if (!mygame.envs.start) {
-      winner();
-    } else if (!mygame.envs.maxAttained) {
-      nextLevel();
-    } else {
-      allPass();
-    }
-  } else if (mygame.player.life <= 0) {
-    death();
-  } else {
-    gameLoop();
-  }
-}
+  var char_obj = mon_jeu.createChar(ground_mat, ball_mat);
 
-mygame.centerCanvas = function () {
-  var x = (windowWidth - width)/2;
-  var y = (windowHeight - height)/2;
-  mygame.can.position(x, y);
-}
+  for (var i = 0; i < char_obj.bodys.length; i++)
+    mon_jeu.monde.addBody(char_obj.bodys[i]);
 
-function windowResized () {
-  mygame.centerCanvas();
-}
+  for (var i = 0; i < char_obj.constraints.length; i++)
+    mon_jeu.monde.addConstraint(char_obj.constraints[i]);
+
+  this.followBody = char_obj.bodys[0];
+  // mon_jeu.monde.on('postStep', function(evenement) {
+    // ball_body.angularForce = .1;
+  // });
+
+  // this.on('keydown', function(evenement) {
+    // switch (evenement.keyCode) {
+      // case 72:
+        // console.log('H is pressed');
+        // break;
+      // case 76:
+        // console.log('L is pressed');
+        // break;
+      // default:
+        // break;
+    // }
+  // });
+});
