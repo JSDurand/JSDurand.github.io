@@ -55,8 +55,6 @@ function setup () {
   mygame.envs.vshift = height/3 - mygame.constants.defaultWidth/2;
   mygame.envs.hshift = width/3 - mygame.constants.defaultHeight/2;
 
-  mygame.photo = loadImage('character.png');
-
   // levelSystem(mygame.envs.level, mygame.envs.diff, mygame.envs.vshift, mygame.envs.hshift, mygame.envs.mysize, mygame.constants.defaultWidth, mygame.constants.defaultHeight);
 
   setTimeout(randoming, 1500);
@@ -64,22 +62,21 @@ function setup () {
 }
 
 function draw() {
-  image(mygame.photo);
-  // if (mygame.envs.intro) {
-    // startInterface();
-  // } else if (mygame.envs.bricks.length == 0) {
-    // if (!mygame.envs.start) {
-      // winner();
-    // } else if (!mygame.envs.maxAttained) {
-      // nextLevel();
-    // } else {
-      // allPass();
-    // }
-  // } else if (mygame.player.life <= 0) {
-    // death();
-  // } else {
-    // gameLoop();
-  // }
+  if (mygame.envs.intro) {
+    startInterface();
+  } else if (mygame.envs.bricks.length == 0) {
+    if (!mygame.envs.start) {
+      winner();
+    } else if (!mygame.envs.maxAttained) {
+      nextLevel();
+    } else {
+      allPass();
+    }
+  } else if (mygame.player.life <= 0) {
+    death();
+  } else {
+    gameLoop();
+  }
 }
 
 mygame.centerCanvas = function () {
