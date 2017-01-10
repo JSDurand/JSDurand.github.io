@@ -49,3 +49,12 @@
   right_arm_body_constraint.setLimits(-Math.PI/3, Math.PI/3);
   char_obj.constraints.push(tete_body_constraint, left_arm_body_constraint,
     right_arm_body_constraint);
+
+      char_obj.bodys[char_obj.body_order.UPPER_LEFT_LEG].applyForce([
+        (char_obj.bodys[char_obj.body_order.PELVIS].position[0] - char_obj.bodys[char_obj.body_order.UPPER_LEFT_LEG].position[0])*10,
+        (char_obj.bodys[char_obj.body_order.PELVIS].position[1] - char_obj.bodys[char_obj.body_order.UPPER_LEFT_LEG].position[1])*10
+      ]);
+      char_obj.bodys[char_obj.body_order.UPPER_RIGHT_LEG].applyForce([
+        (char_obj.bodys[char_obj.body_order.PELVIS].position[0] - char_obj.bodys[char_obj.body_order.UPPER_RIGHT_LEG].position[0])*10,
+        (char_obj.bodys[char_obj.body_order.PELVIS].position[1] - char_obj.bodys[char_obj.body_order.UPPER_RIGHT_LEG].position[1])*10
+      ]);

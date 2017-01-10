@@ -20,36 +20,52 @@ var shouldersDistance = 0.3*0.5,
   var headShape          = new p2.Circle({ radius: headRadius }),
       upperArmShapeLeft  = new p2.Box({
         width: upperArmLength,
-        height: upperArmSize
+        height: upperArmSize,
+        material: matB
       }),
       upperArmShapeRight = new p2.Box({
         width: upperArmLength,
-        height: upperArmSize
+        height: upperArmSize,
+        material: matB
       }),
       lowerArmShapeLeft  = new p2.Box({
         width: lowerArmLength,
-        height: lowerArmSize
+        height: lowerArmSize,
+        material: matB
       }),
       lowerArmShapeRight = new p2.Box({
         width: lowerArmLength,
-        height: lowerArmSize
+        height: lowerArmSize,
+        material: matB
       }),
       upperBodyShape     = new p2.Box({
         width: shouldersDistance,
-        height: upperBodyLength
+        height: upperBodyLength,
+        material: matB
       }),
       pelvisShape        = new p2.Box({
         width: shouldersDistance,
-        height: pelvisLength
+        height: pelvisLength,
+        material: matB
       }),
       upperLegShapeLeft  = new p2.Box({
         width: upperLegSize,
-        height: upperLegLength
+        height: upperLegLength,
+        material: matB
       }),
       upperLegShapeRight = new p2.Box({
         width: upperLegSize,
-        height: upperLegLength
+        height: upperLegLength,
+        material: matB
       }),
+      // lowerLegShapeLeft  = new p2.Circle({
+        // radius: lowerLegLength/2,
+        // material: matB
+      // }),
+      // lowerLegShapeRight = new p2.Circle({
+        // radius: lowerLegLength/2,
+        // material: matB
+      // });
       lowerLegShapeLeft  = new p2.Box({
         width: lowerLegSize,
         height: lowerLegLength
@@ -65,6 +81,32 @@ var shouldersDistance = 0.3*0.5,
   char_obj.constraints = [];
 
   // bodys
+  // Enums for convenience
+  char_obj.body_order = {
+    LOWER_LEFT_LEG  : 0,
+    LOWER_RIGHT_LEG : 1,
+    UPPER_LEFT_LEG  : 2,
+    UPPER_RIGHT_LEG : 3,
+    PELVIS          : 4,
+    UPPER_BODY      : 5,
+    HEAD            : 6,
+    UPPER_LEFT_ARM  : 7,
+    UPPER_RIGHT_ARM : 8,
+    LOWER_LEFT_ARM  : 9,
+    LOWER_RIGHT_ARM : 10
+  };
+  char_obj.cons_order = {
+    NECK           : 0,
+    LEFT_KNEE      : 1,
+    RIGHT_KNEE     : 2,
+    LEFT_HIP       : 3,
+    RIGHT_HIP      : 4,
+    SPINE          : 5,
+    LEFT_SHOULDER  : 6,
+    RIGHT_SHOULDER : 7,
+    LEFT_ELBOW     : 8,
+    RIGHT_ELBOW    : 9
+  };
   // Lower legs
   var lowerLeftLeg = new p2.Body({
     mass: 1,
@@ -109,7 +151,7 @@ var shouldersDistance = 0.3*0.5,
     position: [0,upperBody.position[1]+upperBodyLength/2+headRadius+neckLength],
   });
   head.addShape(headShape);
-  char_obj.bodys.unshift(head);
+  char_obj.bodys.push(head);
   // Upper arms
   var upperLeftArm = new p2.Body({
     mass: 1,
@@ -145,12 +187,12 @@ var shouldersDistance = 0.3*0.5,
   char_obj.constraints.push(neckJoint);
   // Knee joints
   var leftKneeJoint = new p2.RevoluteConstraint(lowerLeftLeg, upperLeftLeg, {
-    localPivotA: [0, lowerLegLength/2],
-    localPivotB: [0,-upperLegLength/2],
+    localPivotA           : [0, lowerLegLength/2],
+    localPivotB           : [0,-upperLegLength/2],
   });
   var rightKneeJoint= new p2.RevoluteConstraint(lowerRightLeg, upperRightLeg, {
-    localPivotA: [0, lowerLegLength/2],
-    localPivotB:[0,-upperLegLength/2],
+    localPivotA           : [0, lowerLegLength/2],
+    localPivotB           : [0,-upperLegLength/2],
   });
   leftKneeJoint.setLimits(-Math.PI / 8, Math.PI / 8);
   rightKneeJoint.setLimits(-Math.PI / 8, Math.PI / 8);
@@ -164,8 +206,8 @@ var shouldersDistance = 0.3*0.5,
     localPivotA: [0, upperLegLength/2],
     localPivotB: [shouldersDistance/2,-pelvisLength/2],
   });
-  leftHipJoint.setLimits(-Math.PI / 8, Math.PI / 8);
-  rightHipJoint.setLimits(-Math.PI / 8, Math.PI / 8);
+  leftHipJoint.setLimits(-Math.PI/8, Math.PI/8);
+  rightHipJoint.setLimits(-Math.PI/8, Math.PI/8);
   char_obj.constraints.push(leftHipJoint, rightHipJoint);
   // Spine
   var spineJoint = new p2.RevoluteConstraint(pelvis, upperBody, {
@@ -198,6 +240,24 @@ var shouldersDistance = 0.3*0.5,
   leftElbowJoint.setLimits(-Math.PI / 8, Math.PI / 8);
   rightElbowJoint.setLimits(-Math.PI / 8, Math.PI / 8);
   char_obj.constraints.push(leftElbowJoint, rightElbowJoint);
+
+  // jump method
+  char_obj.jumping = 0;
+
+  // run method
+  char_obj.running = 0;
+  char_obj.run = function () {
+    // console.log((direction > 0) ? 'forward' : 'backword');
+    if (this.running > 0) { // forward
+      for (var i = 0; i < this.bodys.length; i++) {
+        this.bodys[i].force[0] = 5;
+      }
+    } else if (this.running < 0) {
+      for (var i = 0; i < this.bodys.length; i++) {
+        this.bodys[i].force[0] = -5;
+      }
+    }
+  };
 
   return char_obj;
 }
