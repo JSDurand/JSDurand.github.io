@@ -55,8 +55,6 @@ function setup () {
   mygame.envs.vshift = height/3 - mygame.constants.defaultWidth/2;
   mygame.envs.hshift = width/3 - mygame.constants.defaultHeight/2;
 
-  // levelSystem(mygame.envs.level, mygame.envs.diff, mygame.envs.vshift, mygame.envs.hshift, mygame.envs.mysize, mygame.constants.defaultWidth, mygame.constants.defaultHeight);
-
   setTimeout(randoming, 1500);
   angleMode(DEGREES);
 }
