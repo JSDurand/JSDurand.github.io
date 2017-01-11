@@ -18,7 +18,7 @@ var app = new p2.WebGLRenderer(function(){
   mon_jeu.monde.addContactMaterial(ground_ball_contact);
 
   // Add ground
-  var ground_body = new p2.Body({ position: [0, -1] });
+  var ground_body = new p2.Body({ position: [0, -1.5] });
   ground_body.addShape(new p2.Plane({ material: ground_mat }));
   mon_jeu.monde.addBody(ground_body);
 
@@ -68,12 +68,19 @@ var app = new p2.WebGLRenderer(function(){
     if (mon_jeu.player.running !== 0) {
       mon_jeu.player.run();
     }
+
+    if (mon_jeu.player.punching !== 0) {
+      mon_jeu.player.punch();
+    }
   });
 
   this.on('keydown', function(evenement) {
     switch (evenement.keyCode) {
       case 72: // H
         mon_jeu.player.running = -1;
+        break;
+      case 73: // I
+        mon_jeu.player.punching = -1;
         break;
       case 74: // J
         mon_jeu.player.jumping = 1;
@@ -84,6 +91,16 @@ var app = new p2.WebGLRenderer(function(){
       case 76: // L
         mon_jeu.player.running = 1;
         break;
+      case 79: // O
+        mon_jeu.player.punching = 1;
+        break;
+      case 80:
+        // console.log('PP');
+        mon_jeu.player.punching = 2;
+        break;
+      case 85: // U
+        mon_jeu.player.punching = -2;
+        break;
       default:
         break;
     }
@@ -91,13 +108,28 @@ var app = new p2.WebGLRenderer(function(){
     switch (evenement.keyCode) {
       case 72:
         mon_jeu.player.running = 0;
+        break;
+      case 73:
+        mon_jeu.player.punching = 0;
+        break;
       case 74:
         mon_jeu.player.jumping = 0;
         break;
       case 75:
         mon_jeu.player.jumping = 0;
+        break;
       case 76:
         mon_jeu.player.running = 0;
+        break;
+      case 79:
+        mon_jeu.player.punching = 0;
+        break;
+      case 80:
+        mon_jeu.player.punching = 0;
+        break;
+      case 85:
+        mon_jeu.player.punching = 0;
+        break;
       default:
         break;
     }

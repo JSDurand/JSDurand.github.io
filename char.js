@@ -14,10 +14,13 @@ var shouldersDistance = 0.3*0.5,
     upperLegLength    = 0.3*0.5,
     upperLegSize      = 0.3*0.2,
     lowerLegSize      = 0.3*0.2,
-    lowerLegLength    = 0.3*0.5;
+    lowerLegLength    = 0.3*0.5,
+    clawRadius        = 0.3*0.125;
 
   // shapes
-  var headShape          = new p2.Circle({ radius: headRadius }),
+  var headShape      = new p2.Circle({ radius: headRadius }),
+      clawShapeLeft  = new p2.Circle({ radius: clawRadius }),
+      clawShapeRight = new p2.Circle({ radius: clawRadius }),
       upperArmShapeLeft  = new p2.Box({
         width: upperArmLength,
         height: upperArmSize,
@@ -93,7 +96,9 @@ var shouldersDistance = 0.3*0.5,
     UPPER_LEFT_ARM  : 7,
     UPPER_RIGHT_ARM : 8,
     LOWER_LEFT_ARM  : 9,
-    LOWER_RIGHT_ARM : 10
+    LOWER_RIGHT_ARM : 10,
+    LEFT_CLAW       : 11,
+    RIGHT_CLAW      : 12
   };
   char_obj.cons_order = {
     NECK           : 0,
@@ -105,7 +110,9 @@ var shouldersDistance = 0.3*0.5,
     LEFT_SHOULDER  : 6,
     RIGHT_SHOULDER : 7,
     LEFT_ELBOW     : 8,
-    RIGHT_ELBOW    : 9
+    RIGHT_ELBOW    : 9,
+    LEFT_WRINKLE   : 10,
+    RIGHT_WRINKLE  : 11
   };
   // Lower legs
   var lowerLeftLeg = new p2.Body({
@@ -178,6 +185,20 @@ var shouldersDistance = 0.3*0.5,
   lowerLeftArm.addShape(lowerArmShapeLeft);
   lowerRightArm.addShape(lowerArmShapeRight);
   char_obj.bodys.push(lowerLeftArm, lowerRightArm);
+  // claws
+  var left_claw = new p2.Body({
+    mass: .5,
+    position: [lowerLeftArm.position[0] - clawRadius,
+               lowerLeftArm.position[1]],
+  });
+  var right_claw = new p2.Body({
+    mass: .5,
+    position: [lowerRightArm.position[0] + clawRadius + upperBodyLength/2,
+               lowerRightArm.position[1]],
+  });
+  right_claw.addShape(clawShapeLeft);
+  left_claw.addShape(clawShapeRight);
+  char_obj.bodys.push(left_claw, right_claw);
   // Neck joint
   var neckJoint = new p2.RevoluteConstraint(head, upperBody, {
     localPivotA: [0,-headRadius-neckLength/2],
@@ -240,6 +261,18 @@ var shouldersDistance = 0.3*0.5,
   leftElbowJoint.setLimits(-Math.PI / 8, Math.PI / 8);
   rightElbowJoint.setLimits(-Math.PI / 8, Math.PI / 8);
   char_obj.constraints.push(leftElbowJoint, rightElbowJoint);
+  // Wrinkle joint
+  var left_wrinkle = new p2.RevoluteConstraint(lowerLeftArm, left_claw, {
+    localPivotA: [-lowerArmLength/2 - clawRadius/2, 0],
+    localPivotB: [clawRadius/2, 0],
+  });
+  var right_wrinkle = new p2.RevoluteConstraint(lowerRightArm, right_claw, {
+    localPivotA: [lowerArmLength/2 + clawRadius/2, 0],
+    localPivotB: [clawRadius/2, 0],
+  });
+  left_wrinkle.setLimits(-Math.PI/10, Math.PI/10);
+  right_wrinkle.setLimits(-Math.PI/10, Math.PI/10);
+  char_obj.constraints.push(left_wrinkle, right_wrinkle);
 
   // jump method
   char_obj.jumping = 0;
@@ -257,6 +290,19 @@ var shouldersDistance = 0.3*0.5,
         this.bodys[i].force[0] = -5;
       }
     }
+  };
+
+  // punch method
+  char_obj.punching = 0; // not punching
+  char_obj.punch = function () {
+    if (this.punching > 0) { // right hand
+      var factor = (this.punching === 1) ? 1 : -1;
+      this.bodys[this.body_order.RIGHT_CLAW].angularForce += factor*10;
+    } else if (this.punching < 0) { // left hand
+      var factor = (this.punching === -1) ? 1 : -1;
+      this.bodys[this.body_order.LEFT_CLAW].angularForce  -= factor*10;
+    }
+    // this.punching = 0;
   };
 
   return char_obj;

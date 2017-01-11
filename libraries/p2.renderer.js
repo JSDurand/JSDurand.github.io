@@ -16516,9 +16516,9 @@ Renderer.prototype.setUpKeyboard = function() {
         var s = that.state;
         var ch = String.fromCharCode(e.keyCode);
         switch(ch){
-        case "P": // pause
-            that.paused = !that.paused;
-            break;
+        // case "P": // pause
+            // that.paused = !that.paused;
+            // break;
         case "S": // step
             that.world.step(that.world.lastTimeStep);
             break;
