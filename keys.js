@@ -8,7 +8,7 @@ function keyPressed() {
       return;
     }
 
-    mygame.player.eject();
+    mygame.player.choose_direction();
   }
 
   if (key === 'S') {
@@ -173,6 +173,12 @@ function keyReleased () {
     mygame.player.jumpingUp = true;
     mygame.player.vy = -5;
   }
+
+  if (key === 'K') {
+    mygame.player.show_direction = false;
+    mygame.player.eject(mygame.player.direction);
+    mygame.player.direction = mygame.player.defaultDirection;
+  }
 }
 
 function touchStarted () {
@@ -187,7 +193,7 @@ function touchStarted () {
       mygame.envs.timing         = 0;
       mygame.envs.animeNo        = 0;
     } else if (mygame.envs.bricks.length != 0) {
-      mygame.player.eject();
+      mygame.player.choose_direction();
     } else {
       if (mygame.envs.bricks.length !== 0) {
         // mygame.player.life = mygame.player.life <= 0 ? mygame.player.life : 1;
@@ -206,6 +212,14 @@ function touchStarted () {
 
   return false;
  }
+
+function touchEnded () {
+  if (mygame.player.show_direction) {
+    mygame.player.show_direction = false;
+    mygame.player.eject(mygame.player.direction);
+    mygame.player.direction = mygame.player.defaultDirection;
+  }
+}
 
 mygame.startover = function() {
   mygame.player.life = mygame.envs.defaultLife;

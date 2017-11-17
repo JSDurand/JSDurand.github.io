@@ -10,6 +10,14 @@ function myPlayer() {
   player.representation = function () {
     fill(255);
     rect(this.x, this.y, this.width, this.height);
+    if (this.show_direction) {
+      strokeWeight(5);
+      stroke(200,0,0);
+      line(this.x + this.width/2, this.y, this.x+ this.width/2 + 60*cos(this.direction), this.y - 60*sin(this.direction));
+      this.choose_direction();
+      strokeWeight(1);
+      stroke(0);
+    }
   };
 
   player.updatePos = function () {
@@ -37,14 +45,25 @@ function myPlayer() {
     }
   };
 
-  player.life = mygame.envs.defaultLife;
-  player.oldx = player.x;
-  player.oldy = player.y;
-  player.vx   = 0;
-  player.vy   = 0;
+  player.life             = mygame.envs.defaultLife;
+  player.oldx             = player.x;
+  player.oldy             = player.y;
+  player.vx               = 0;
+  player.vy               = 0;
+  player.show_direction   = false;
+  player.defaultDirection = 30;
+  player.direction        = 30;
 
-  player.eject = function () {
-    mygame.envs.balls.push(ball(this.midX(), this.upper() - this.height));
+  player.choose_direction = function () {
+    this.show_direction = true;
+    this.direction      = (this.direction <= 180 - this.defaultDirection) ? this.direction + 2 : this.defaultDirection;
+  }
+
+  player.eject = function (direction) {
+    var new_ball = ball(this.midX(), this.upper() - this.height);
+    new_ball.vx = 5*cos(direction);
+    new_ball.vy = -5*sin(direction);
+    mygame.envs.balls.push(new_ball);
     var len = mygame.envs.balls.length;
     var bris = mygame.envs.bricks;
     var bri_len = bris.length;

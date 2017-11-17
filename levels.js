@@ -135,7 +135,9 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
         mygame.envs.bricks.push(brick(width/5+mysize*i, baseH+100, hBaseSize, vBaseSize, 0.5+i/10));
         mygame.envs.bricks.push(brick(width/5+mysize*i, baseH + 200, hBaseSize, vBaseSize, 0.5+i/10));
       }
-      mygame.envs.obs.push(obstacles(width/2-20, height/2-50, 100, 40, 1.2));
+      var ob = obstacles(width*9/24, height/3, 100, 40, 1.2);
+      ob.square_route(5);
+      mygame.envs.obs.push(ob);
       // var invbrick_one = brick(width/2-100, height/2-100, 100, 50, 0.9);
       // invbrick_one.invisible = true;
       // mygame.envs.bricks.push(invbrick_one);

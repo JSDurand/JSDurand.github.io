@@ -2,3 +2,21 @@
 // Different characters can choose various different professions, and
 // different professions can choose various different skills.
 // This will make the game more diverse and playable, I hope.
+
+function character () {
+  var newCharacter = {
+    profession : {},
+    level      : 1,
+    defense    : 0,
+    attack     : 0,
+  };
+  return newCharacter;
+}
+
+// kind is an integer representing different professions
+function newProfession (kind) {
+  return {
+    name: "profession name",
+    skills: {},
+  };
+}
