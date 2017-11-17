@@ -106,7 +106,7 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
         mygame.envs.unbreakables.push(unbrick(startPos+mysize*i, baseH + 150, hBaseSize, vBaseSize, 0.9, 1500, 100));
         mygame.envs.bricks.push(brick(startPos+mysize*i, baseH + 100, hBaseSize, vBaseSize, 0.9));
       }
-      mygame.envs.bricks.push(pill(width/2-25, height/2-110, 'ENLARGE'));
+      mygame.envs.bricks.push(pill(width/2-25, baseH + 100, 'ENLARGE'));
       mygame.envs.whites.push(hole(startPos+75, baseH-50, 50, 'white'));
       mygame.envs.whites.push(hole(startPos, baseH+115, 50, 'white'));
       mygame.envs.whites.push(hole(startPos + mysize*5.5, baseH-50, 50, 'white'));
@@ -149,10 +149,11 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       mygame.clear();
       // var temp = brick(width/3, height/3, hBaseSize, vBaseSize, 0.9);
       // temp.invisible = true;
-      var ob_one = obstacles(width/3, height/3, hBaseSize, vBaseSize, 1.2);
+      var ob_one = obstacles(width*7/24, height*7/24-15, hBaseSize, vBaseSize, 1.2);
       var ob_two = obstacles(width*2/3, height/3, hBaseSize, vBaseSize, 1.2);
       ob_one.radius = 60;
       ob_two.radius = 60;
+      ob_one.square_route(2);
 
       for (var i = 1; i < 6; i++) {
         mygame.envs.bricks.push(brick(startPos+mysize*i, baseH, hBaseSize, vBaseSize, 0.5+i/10));

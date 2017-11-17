@@ -175,30 +175,37 @@ function keyReleased () {
   }
 }
 
-/*
- * function mousePressed () {
- *   if (mygame.envs.timeStop) {
- *     return;
- *   }
- * 
- *   if (mygame.envs.intro) {
- *     return;
- *   }
- * 
- *   if(mygame.envs.superDuper) {}
- *   else {
- *     var val = prompt('\u8F38\u5165\u5BC6\u78BC', '\u4F10\u4F10\u4F10\u4F10\u4F10\u6728\u5DE5');
- *     if (val === '\u5955\u752B') {mygame.envs.superDuper = true;}
- *   }
- * 
- *   if (mygame.envs.superDuper) {
- *     mygame.player.eject();
- *     mygame.player.width = width *6;
- *     mygame.player.halfWidth = width *3;
- *     mygame.player.height = 20;
- *   } else {}
- * }
- */
+function touchStarted () {
+    if (mygame.envs.timeStop) {
+      return;
+    }
+
+    if (mygame.envs.intro) {
+      mygame.startover();
+    } else if (mygame.envs.playAnimeOrNot) {
+      mygame.envs.playAnimeOrNot = false;
+      mygame.envs.timing         = 0;
+      mygame.envs.animeNo        = 0;
+    } else if (mygame.envs.bricks.length != 0) {
+      mygame.player.eject();
+    } else {
+      if (mygame.envs.bricks.length !== 0) {
+        // mygame.player.life = mygame.player.life <= 0 ? mygame.player.life : 1;
+        alert('\u8B66\u544A:\u4E0D\u8981\u4E82\u4F86!');
+      } else {
+         if (mygame.envs.level < mygame.envs.maxLevel) {
+           mygame.player.life = mygame.envs.defaultLife;
+           mygame.envs.start = true;
+           mygame.envs.level += (mygame.envs.level === 8 || mygame.envs.level === 8.5) ? .5 : 1;
+         } else {
+           mygame.envs.start = true;
+           mygame.envs.maxAttained = true;
+         }
+      }
+    }
+
+  return false;
+ }
 
 mygame.startover = function() {
   mygame.player.life = mygame.envs.defaultLife;

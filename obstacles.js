@@ -17,5 +17,27 @@ function obstacles(x, y, hsize, vsize, coe) {
     this.timing = (this.timing > 180) ? 0 : this.timing + 1;
   }
 
+  ob_brick.square_route = function (length) {
+    this.updatePos = function () {
+      changex = 0;
+      changey = 0;
+      if (this.timing < 45) {
+        changex = length;
+      } else if (45 <= this.timing && this.timing < 90) {
+        changey = length;
+      } else if (90 <= this.timing && this.timing < 135) {
+        changex = -length;
+      } else if (135 <= this.timing && this.timing < 180) {
+        changey = -length;
+      }
+
+      this.x += changex;
+      this.y += changey;
+
+      this.timing = (this.timing >= 180) ? 0 : this.timing + 1;
+
+    }
+  }
+
   return ob_brick;
 }

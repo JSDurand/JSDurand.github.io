@@ -102,8 +102,7 @@ mygame.showScore = function () {
 
   if (mygame.envs.timeStop) {
     text("\u6642\u9593\u66ab\u505c!", width-250, 50);
-    text("\u95dc\u5361:\t" + mygame.envs.level + "\n\u751f\u547d:\t" + mygame.player.life, 50, 50);
-  } else {
-    text("\u95dc\u5361:\t" + mygame.envs.level + "\n\u751f\u547d:\t" + mygame.player.life, 50, 50);
   }
+
+  text("\u95dc\u5361:\t" + mygame.envs.level + "\n\u751f\u547d:\t" + mygame.player.life + "\n\u5834\u4e0a\u7684\u7403:\t" + mygame.envs.balls.length, 50, 50);
 }
