@@ -5,6 +5,9 @@ function myPlayer() {
   player.jumpingDown = false;
   player.jumpingUp = false;
   player.jumpStopAt = height - player.height - player.padding;
+  // player.charged = true;
+  // player.charge = -1000;
+  // player.magnetRange = 100;
   player.setPos(width/2 - player.halfWidth, height - player.padding - player.height);
 
   player.representation = function () {

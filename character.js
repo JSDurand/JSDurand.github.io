@@ -4,13 +4,12 @@
 // This will make the game more diverse and playable, I hope.
 
 function character () {
-  var newCharacter = {
+  return {
     profession : {},
     level      : 1,
     defense    : 0,
     attack     : 0,
   };
-  return newCharacter;
 }
 
 // kind is an integer representing different professions
@@ -20,3 +19,5 @@ function newProfession (kind) {
     skills: {},
   };
 }
+
+// mygame.all_skills.magnet = {a:1};

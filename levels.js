@@ -196,6 +196,9 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       // invbrick_four.invisible = true;
       mygame.envs.bricks.push(invbrick_one);
       mygame.envs.bricks.push(bomb(width*2/3, height*2/3, 50));
+
+      var rotbrick = rotationBrick(width/3,height*2/3,200,30);
+      mygame.envs.rotbricks.push(rotbrick);
       // mygame.envs.obs.push(obstacles(width/2-20, height/2-50, 100, 40, 1.1));
       // mygame.envs.bricks.push(invbrick_two);
       // mygame.envs.bricks.push(invbrick_three);

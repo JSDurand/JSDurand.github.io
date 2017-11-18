@@ -9,6 +9,9 @@ function gameLoop () {
     for (var i = 0; i < mygame.envs.bricks.length; i++) {
       mygame.envs.bricks[i].representation();
     }
+    for (var i = 0; i < mygame.envs.rotbricks.length; i++) {
+      mygame.envs.rotbricks[i].representation();
+    }
     for (var i = 0; i < mygame.envs.pills.length; i++) {
       mygame.envs.pills[i].representation();
     }
@@ -49,7 +52,7 @@ function gameLoop () {
   mygame.ball_collide(mygame.envs.balls);
   mygame.check_bricks(mygame.envs.bricks);
 
-  mygame.collidables = mygame.envs.bricks.concat(mygame.envs.pills, mygame.envs.balls, mygame.envs.unbreakables, mygame.envs.blacks, mygame.envs.whites, mygame.envs.obs);
+  mygame.collidables = mygame.envs.bricks.concat(mygame.envs.pills, mygame.envs.balls, mygame.envs.unbreakables, mygame.envs.blacks, mygame.envs.whites, mygame.envs.obs, mygame.envs.rotbricks);
 
   for (var i = mygame.collidables.length - 1; i >= 0; i--) {
     mygame.collidables[i].updatePos();

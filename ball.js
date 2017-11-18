@@ -42,7 +42,7 @@ function ball(x, y, r, vx, vy) {
       this.yhitted = true;
       this.y = 0;
     } else if (mygame.nonEmptyHom(this, mygame.player)) {
-      this.y = mygame.player.upper() - this.radius/2;
+      // this.y = mygame.player.upper() - this.radius/2;
       this.hitPlayerReaction();
     } else if (this.offscreen()){
       this.yhitted = true;
@@ -61,6 +61,21 @@ function ball(x, y, r, vx, vy) {
     if (this.playerHitted) {
       this.vx += mygame.player.vx;
       this.vy += mygame.player.vy;
+      if (mygame.player.charged) {
+        var q = mygame.player.charge;
+        var v = createVector(this.x - mygame.player.midX(), this.y - mygame.player.midY());
+        var d = v.magSq();
+        v.normalize();
+        v.x  *= q/d;
+        v.y  *= q/d;
+        this.vx += v.x;
+        this.vy += v.y;
+        if (this.y > mygame.player.upper()) {
+          this.vy = -1 * abs(this.vy);
+        }
+      } else {
+        this.vy *= -1;
+      }
       this.playerHitted = false;
     }
   }
@@ -68,7 +83,7 @@ function ball(x, y, r, vx, vy) {
   newBall.hitPlayerReaction = function () {
     if (typeof this.effect === 'undefined') {
       this.playerHitted = true; 
-      this.yhitted = true;
+      // this.yhitted = true;
     } else {
       this.dealEffect();
     }

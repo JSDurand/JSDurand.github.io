@@ -4,6 +4,7 @@ mygame.envs = {
   balls : [],
   pills : [],
   bricks : [],
+  rotbricks: [],
   level : 0,
   defaultLife : 10,
   gravity : 0.02,
@@ -56,6 +57,7 @@ function setup () {
   mygame.envs.hshift = width/3 - mygame.constants.defaultHeight/2;
 
   setTimeout(randoming, 1500);
+  frameRate(30);
   angleMode(DEGREES);
 }
 

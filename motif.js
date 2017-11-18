@@ -124,86 +124,24 @@ mygame.objects = {
 mygame.nonEmptyHom = function (obj1, obj2) {
   // We assume X is always a ball, and Y is always a rectangle.
 
-  if (obj1.shape === mygame.constants.smallBall) {
-    if (obj1.invisible) {
-      if (obj1.y < mygame.player.upper()) {return false;}
-      else {
-        var b = (obj1.x > mygame.player.left()) && (obj1.x < mygame.player.right());
-        if (b) {obj1.eaten = true;}
-
-        return b;
-      }
-    }
-
-    if (obj1.x < obj2.left() || obj1.x > obj2.right() || obj1.y > obj2.lower() || obj1.y < obj2.upper()) {
-      if (obj2.charged) {
-        var d  = dist(obj1.x, obj1.y, obj2.midX(), obj2.midY());
-        if (d < obj2.magnetRange) {
-          obj1.magnetized = true;
-          return true;
-        } else {
-          obj1.magnetized = false;
-          return false;
-        }
-      } else {
-        obj1.magnetized = false;
-        return false;
-      }
-    }
-    
-    return true;
-  } else if (obj1.shape === mygame.constants.bigBall) {
-    if (obj1.invisible) {
-      if (obj1.y < mygame.player.upper()) {return false;}
-      else {
-        var b = (obj1.x > mygame.player.left()) && (obj1.x < mygame.player.right());
-        if (b) {
-          obj1.eaten = true;
-        }
-
-        return b;
-      }
-    }
-
-    var rect0x = obj2.left();
-    var rect0y = obj2.lower();
-    var rect1x = obj2.left();
-    var rect1y = obj2.upper();
-    var rect2x = obj2.right();
-    var rect2y = obj2.upper();
-    var rect3x = obj2.right();
-    var rect3y = obj2.lower();
-    var epsilon = 1;
-    var adjust = obj1.radius/2 + epsilon;
-
-    var inter1 = lineIntersection(rect0x - adjust, rect0y + adjust, rect1x - adjust, rect1y - adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
-    var inter2 = lineIntersection(rect1x - adjust, rect1y - adjust, rect2x + adjust, rect2y - adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
-    var inter3 = lineIntersection(rect2x + adjust, rect2y - adjust, rect3x + adjust, rect3y + adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
-    var inter4 = lineIntersection(rect3x + adjust, rect3y + adjust, rect0x - adjust, rect0y + adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
-
-    if (inter1 || inter2 || inter3 || inter4) {
-      return true;
-    } else {
-        if (obj2.charged) {
-          var d  = dist(obj1.x, obj1.y, obj2.midX(), obj2.midY());
-
-          if (d < obj2.magnetRange) {
-            obj1.magnetized = true;
-            return true;
-          } else {
-            obj1.magnetized = false;
-            return false;
-          }
-        } else {
-          obj1.magnetized = false;
-          return false;
-        }
-    }
+  // maybe the brick is rotated
+  if (typeof obj2.angle === 'undefined') {
+    return mygame.ball_normal_rect_intersection(obj1, obj2);
+  } else {
+    var fake_ball = Object.assign({}, obj1);
+    var angle = obj2.angle;
+    var old_x = fake_ball.x - obj2.midX();
+    var old_y = fake_ball.y - obj2.midY();
+    fake_ball.x = obj2.midX() + rotation(-angle, old_x, old_y, 0);
+    fake_ball.y = obj2.midY() + rotation(-angle, old_x, old_y, 2);
+     return mygame.ball_normal_rect_intersection(fake_ball, obj2);
   }
-
-  console.log('two strange shapes: ' + obj1.shape + ' and ' + obj2.shape);
-  return false;
 };
+
+function rotation (angle, oldx, oldy, row_index) {
+  var rotation_matrix = [cos(angle), -sin(angle), sin(angle), cos(angle)];
+  return rotation_matrix[row_index] * oldx + rotation_matrix[row_index+1] * oldy;
+}
 
 function lineIntersection (x1, y1, x2, y2, x3, y3, x4, y4) {
   var dir1 = turnDir(x1, y1, x2, y2, x3, y3);
@@ -222,10 +160,31 @@ function turnDir (x1, y1, x2, y2, x3, y3) {
 }
 
 mygame.Hom = function (X, Y) {
-  if (!Y.charged) {
-    elasticMapping(X, Y);
+  if (typeof Y.angle === 'undefined') {
+    if (!Y.charged) {
+      elasticMapping(X, Y);
+    } else {
+      magneticMapping(X, Y);
+    }
   } else {
-    magneticMapping(X, Y);
+    var fake_ball = Object.assign({}, X);
+    var angle = Y.angle;
+    var old_x = fake_ball.x - Y.midX();
+    var old_y = fake_ball.y - Y.midY();
+    fake_ball.x = Y.midX() + rotation(-angle, old_x, old_y, 0);
+    fake_ball.y = Y.midY() + rotation(-angle, old_x, old_y, 2);
+    fake_ball.vx = rotation(-angle, fake_ball.vx, fake_ball.vy, 0);
+    fake_ball.vy = rotation(-angle, fake_ball.vx, fake_ball.vy, 2);
+    if (!Y.charged) {
+      elasticMapping(fake_ball, Y);
+    } else {
+      magneticMapping(fake_ball, Y);
+    }
+    X.x = Y.midX() + rotation(angle, fake_ball.x - Y.midX(), fake_ball.y - Y.midY(), 0);
+    X.y = Y.midX() + rotation(angle, fake_ball.x - Y.midX(), fake_ball.y - Y.midY(), 2);
+    X.vx = rotation(angle, fake_ball.vx, fake_ball.vy, 0);
+    X.vy = rotation(angle, fake_ball.vx, fake_ball.vy, 2);
+
   }
 }
 
@@ -279,7 +238,7 @@ mygame.motif = function (joueur, collidables) {
       collidables.splice(i, 1);
       for (var j = 0; j < mygame.envs.hittedArray.length; j++) {
         mygame.envs.hittedArray[j] = [];
-        for (var k = j + 1; k < mygame.envs.hittedArray; k++) {
+        for (var k = j + 1; k < mygame.envs.hittedArray.length; k++) {
           mygame.envs.hittedArray[j].push(false);
         }
       }
@@ -322,6 +281,15 @@ mygame.motif = function (joueur, collidables) {
         continue;
       }
       bris[j].ballHits[i] = false;
+    }
+
+    var bris = mygame.envs.rotbricks;
+    var m    = bris.length;
+
+    for (var j = m - 1; j >= 0; j--) {
+      if (mygame.nonEmptyHom(coli, bris[j])) {
+        mygame.Hom(coli, bris[j]);
+      } 
     }
 
     var bris = mygame.envs.unbreakables;
@@ -459,4 +427,89 @@ mygame.check_bricks = function (bricks_list) {
   for (var i = l - 1; i > -1; i--)
     if (bricks_list[i].off)
       mygame.player.life = 0;
+}
+
+mygame.ball_normal_rect_intersection = function (obj1, obj2) {
+  // We assume X is always a ball, and Y is always a rectangle.
+
+  if (obj1.shape === mygame.constants.smallBall) {
+    if (obj1.invisible) {
+      if (obj1.y < mygame.player.upper()) {return false;}
+      else {
+        var b = (obj1.x > mygame.player.left()) && (obj1.x < mygame.player.right());
+        if (b) {obj1.eaten = true;}
+
+        return b;
+      }
+    }
+
+    if (obj1.x < obj2.left() || obj1.x > obj2.right() || obj1.y > obj2.lower() || obj1.y < obj2.upper()) {
+      if (obj2.charged) {
+        var d  = dist(obj1.x, obj1.y, obj2.midX(), obj2.midY());
+        if (d < obj2.magnetRange) {
+          obj1.magnetized = true;
+          return true;
+        } else {
+          obj1.magnetized = false;
+          return false;
+        }
+      } else {
+        obj1.magnetized = false;
+        return false;
+      }
+    }
+    
+    return true;
+  } else if (obj1.shape === mygame.constants.bigBall) {
+    if (obj1.invisible) {
+      if (obj1.y < mygame.player.upper()) {return false;}
+      else {
+        var b = (obj1.x > mygame.player.left()) && (obj1.x < mygame.player.right());
+        if (b) {
+          obj1.eaten = true;
+        }
+
+        return b;
+      }
+    }
+
+    var rect0x = obj2.left();
+    var rect0y = obj2.lower();
+    var rect1x = obj2.left();
+    var rect1y = obj2.upper();
+    var rect2x = obj2.right();
+    var rect2y = obj2.upper();
+    var rect3x = obj2.right();
+    var rect3y = obj2.lower();
+    var epsilon = 1;
+    var adjust = obj1.radius/2 + epsilon;
+
+    var inter1 = lineIntersection(rect0x - adjust, rect0y + adjust, rect1x - adjust, rect1y - adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
+    var inter2 = lineIntersection(rect1x - adjust, rect1y - adjust, rect2x + adjust, rect2y - adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
+    var inter3 = lineIntersection(rect2x + adjust, rect2y - adjust, rect3x + adjust, rect3y + adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
+    var inter4 = lineIntersection(rect3x + adjust, rect3y + adjust, rect0x - adjust, rect0y + adjust, obj1.x, obj1.y, obj1.x + obj1.vx, obj1.y + obj1.vy);
+
+    if (inter1 || inter2 || inter3 || inter4) {
+      return true;
+    } else {
+        if (obj2.charged) {
+          var d  = dist(obj1.x, obj1.y, obj2.midX(), obj2.midY());
+
+          if (d < obj2.magnetRange) {
+            obj1.magnetized = true;
+            return true;
+          } else {
+            obj1.magnetized = false;
+            return false;
+          }
+        } else {
+          obj1.magnetized = false;
+          return false;
+        }
+    }
+  }
+
+  console.log('two strange shapes: ' + obj1.shape + ' and ' + obj2.shape);
+  return false;
+
 }
