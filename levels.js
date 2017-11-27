@@ -233,6 +233,7 @@ function reset(diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
 
 mygame.clear = function () {
   mygame.envs.bricks = [];
+  mygame.envs.rotbricks = [];
   mygame.envs.unbreakables = [];
   mygame.envs.balls = [];
   mygame.envs.pills = [];

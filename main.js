@@ -29,7 +29,8 @@ mygame.envs = {
   animeNo : 0,
   hBaseSize : 50,
   vBaseSize : 25,
-  hittedArray : []
+  hittedArray : [],
+  k : 0,
 };
 
 /*
@@ -46,7 +47,7 @@ mygame.envs = {
  */
 
 function setup () {
-  mygame.can = createCanvas(windowWidth, windowHeight);
+  mygame.can = createCanvas(windowWidth*4/5, windowHeight);
   mygame.centerCanvas();
 
   mygame.player = myPlayer();

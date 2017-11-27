@@ -2,6 +2,10 @@ function startInterface () {
   background(0);
   var xcenter = width/2;
   var ycenter = height/2;
+  var bwidth  = width/20;
+  var bheight = height/20;
+  var t_inter = height/10;
+  var t_base  = height*7/20;
 
   if (mygame.envs.bricks.length !== 0) {
     mygame.clear();
@@ -10,39 +14,49 @@ function startInterface () {
   textSize(40);
   textAlign(LEFT);
   fill(255, 0, 0);
-  text('\u6253\u78DA\u584A\u904A\u6232', xcenter-110, 100);
+  text('\u6253\u78DA\u584A\u904A\u6232', xcenter-110, height/10);
   fill(255,128,0);
   for (var i = 0; i < 5; i++) {
-    rect(xcenter-250+100*i, 150, 50, 30);
+    rect(xcenter-250+100*i, height/5, bwidth, bheight);
   }
   fill(0,255,0);
   for (var i = 0; i < 5; i++) {
-    rect(xcenter-250+100*i, 500, 50, 30);
+    rect(xcenter-250+100*i, height*4/5, bwidth, bheight);
   }
   fill(142, 180, 235);
-  for (var i = 0; i < 2; i++) {
-    rect(xcenter-250, 275+100*i, 50, 30);
+  for (var i = 1; i < 3; i++) {
+    rect(xcenter-250, height/5+height*i/5, bwidth, bheight);
   }
   fill(255,0,64);
-  for (var i = 0; i < 2; i++) {
-    rect(xcenter+150, 275+100*i, 50, 30);
+  for (var i = 1; i < 3; i++) {
+    rect(xcenter+150, height/5+height*i/5, bwidth, bheight);
   }
   fill(95,128,224);
   textSize(30);
   textAlign(CENTER);
   // text('ENTER', xcenter-100, ycenter-100);
-  text('\uFF2A \u8df3\u8e8d', xcenter-100, ycenter-50-50);
-  text(' \uFF2B\u767C\u5C04', xcenter-100, ycenter-50);
-  text(' N \u91CD\u4F86', xcenter-100, ycenter+50-50);
+  text('\uFF2A \u8df3\u8e8d', xcenter-100, t_base+t_inter);
+  text(' \uFF2B\u767C\u5C04', xcenter-100, t_base+2*t_inter);
+  text(' N \u91CD\u4F86', xcenter-100, t_base+3*t_inter);
   textSize(40);
-  text('\u8f38\u5165\u9375', xcenter+50, ycenter-40-50);
-  text('\u555f\u52d5',xcenter+50,ycenter+50-50);
+  text('\u8f38\u5165\u9375', xcenter+50, t_base+t_inter);
+  text('\u555f\u52d5',xcenter+50,t_base+3*t_inter);
   textSize(30);
-  text('\u6309\uff33\u66ab\u505c',xcenter-20,ycenter-100-50)
-  text('\u6309\uff2d\u8df3\u95dc',xcenter-20,ycenter+100-50);
+  text('\u6309\uff33\u66ab\u505c',xcenter-20,t_base)
+  text('\u6309\uff2d\u8df3\u95dc',xcenter-20,t_base+4*t_inter);
   // text('\u76e1\n\u60c5\n\u73a9', xcenter+50, ycenter-80);
   // text('Let us break bricks!\nPress r to start!\nPress n to see this again!\nAnd press k to launch bullets!', xcenter, ycenter - 75);
   textAlign(LEFT);
+}
+
+function basicInterface () {
+  var boundary1 = width/10;
+  var boundary2 = width*9/10;
+  var j1 = height/5;
+  var j2 = height*7/20;
+
+  fill(255,0,0);
+  rect(0,j1,boundary1,j2-j1);
 }
 
 mygame.playAnime = function () {

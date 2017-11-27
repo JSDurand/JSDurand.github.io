@@ -1,0 +1,59 @@
+#jfunc {
+  position         : absolute;
+  left             : 1vw;
+  top              : 10vh;
+  background-color : #4CAF50;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#kfunc {
+  position         : absolute;
+  left             : 1vw;
+  top              : 30vh;
+  background-color : #4CAF50;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#nfunc {
+  position         : absolute;
+  left             : 1vw;
+  top              : 50vh;
+  background-color : #4CAF50;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#returnfunc {
+  position         : absolute;
+  right            : 1vw;
+  top              : 10vh;
+  background-color : #4CAF50;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#sfunc {
+  position         : absolute;
+  right            : 1vw;
+  top              : 30vh;
+  background-color : #4CAF50;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#mfunc {
+  position         : absolute;
+  right            : 1vw;
+  top              : 50vh;
+  background-color : #4CAF50;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
