@@ -1,8 +1,12 @@
+body {
+  background-color : #00FFFF;
+}
+
 #jfunc {
   position         : absolute;
   left             : 1vw;
   top              : 10vh;
-  background-color : #4CAF50;
+  background-color : #FFA100;
   width            : 8vw;
   height           : 10vh;
   font-size        : 3vh;
@@ -12,7 +16,7 @@
   position         : absolute;
   left             : 1vw;
   top              : 30vh;
-  background-color : #4CAF50;
+  background-color : #FFA100;
   width            : 8vw;
   height           : 10vh;
   font-size        : 3vh;
@@ -22,7 +26,7 @@
   position         : absolute;
   left             : 1vw;
   top              : 50vh;
-  background-color : #4CAF50;
+  background-color : #FFA100;
   width            : 8vw;
   height           : 10vh;
   font-size        : 3vh;
@@ -32,7 +36,7 @@
   position         : absolute;
   right            : 1vw;
   top              : 10vh;
-  background-color : #4CAF50;
+  background-color : #FFA100;
   width            : 8vw;
   height           : 10vh;
   font-size        : 3vh;
@@ -42,7 +46,7 @@
   position         : absolute;
   right            : 1vw;
   top              : 30vh;
-  background-color : #4CAF50;
+  background-color : #FFA100;
   width            : 8vw;
   height           : 10vh;
   font-size        : 3vh;
@@ -52,7 +56,37 @@
   position         : absolute;
   right            : 1vw;
   top              : 50vh;
-  background-color : #4CAF50;
+  background-color : #FFA100;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#leftfunc {
+  position         : absolute;
+  left             : 1vw;
+  top              : 70vh;
+  background-color : #FFA100;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#rightfunc {
+  position         : absolute;
+  right            : 1vw;
+  top              : 70vh;
+  background-color : #FFA100;
+  width            : 8vw;
+  height           : 10vh;
+  font-size        : 3vh;
+}
+
+#replayfunc {
+  position         : absolute;
+  right            : 1vw;
+  top              : 50vh;
+  background-color : #FFA100;
   width            : 8vw;
   height           : 10vh;
   font-size        : 3vh;

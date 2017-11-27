@@ -27,10 +27,19 @@ function startInterface () {
   for (var i = 1; i < 3; i++) {
     rect(xcenter-250, height/5+height*i/5, bwidth, bheight);
   }
+  // rect(width/20,height*7/20,width/10,height/3+height/30);
+  // fill(255,128,0);
+  // textSize(height*3/100);
+  // text('LEFT',width*3/40,height/2+height/24)
   fill(255,0,64);
   for (var i = 1; i < 3; i++) {
     rect(xcenter+150, height/5+height*i/5, bwidth, bheight);
   }
+  // fill(255,0,0);
+  // rect(width*17/20,height*7/20,width/10,height/3+height/30);
+  // fill(0,255,0);
+  // textSize(height*3/100);
+  // text('RIGHT',width*17/20+width/60,height/2+height/24)
   fill(95,128,224);
   textSize(30);
   textAlign(CENTER);
@@ -43,7 +52,8 @@ function startInterface () {
   text('\u555f\u52d5',xcenter+50,t_base+3*t_inter);
   textSize(30);
   text('\u6309\uff33\u66ab\u505c',xcenter-20,t_base)
-  text('\u6309\uff2d\u8df3\u95dc',xcenter-20,t_base+4*t_inter);
+  text('\u6309\u0052\u91cd\u64ad',xcenter-20,t_base+4*t_inter);
+  // text('\u6309\uff2d\u8df3\u95dc',xcenter-20,t_base+4*t_inter);
   // text('\u76e1\n\u60c5\n\u73a9', xcenter+50, ycenter-80);
   // text('Let us break bricks!\nPress r to start!\nPress n to see this again!\nAnd press k to launch bullets!', xcenter, ycenter - 75);
   textAlign(LEFT);

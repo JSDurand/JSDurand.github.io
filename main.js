@@ -31,7 +31,12 @@ mygame.envs = {
   vBaseSize : 25,
   hittedArray : [],
   k : 0,
+  time : 0,
+  record : [],
+  recording : false,
 };
+
+mygame.envs.mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 /*
  * function preload() {
@@ -63,6 +68,7 @@ function setup () {
 }
 
 function draw() {
+  mygame.envs.time += 30;
   if (mygame.envs.intro) {
     startInterface();
   } else if (mygame.envs.bricks.length == 0) {

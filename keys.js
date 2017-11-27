@@ -15,8 +15,20 @@ function keyPressed() {
     mygame.bfunction();
   }
 
+  if (key === 'R') {
+    mygame.replay(mygame.envs.record);
+  }
+
   if (keyCode === RETURN) {
     mygame.returnfunction();
+  }
+
+  if (keyCode === LEFT_ARROW) {
+    mygame.leftfunction();
+  }
+
+  if (keyCode === RIGHT_ARROW) {
+    mygame.rightfunction();
   }
 
 /*
@@ -63,50 +75,6 @@ function keyPressed() {
   }
 }
 
-// function keyReleased () {
-    // if (mygame.envs.timeStop) {
-      // return;
-    // }
-
-  // if (key === 'J') {
-    // mygame.player.jumpingUp = true;
-    // mygame.player.vy = -5;
-  // }
-
-  // if (key === 'K') {
-    // mygame.player.show_direction = false;
-    // mygame.player.eject(mygame.player.direction);
-    // mygame.player.direction = mygame.player.defaultDirection;
-  // }
-// }
-
-function touchStarted () {
-  if (mygame.envs.timeStop) {
-    return;
-  }
-
-  var mx = mouseX;
-  var my = mouseY;
-
-  var boundary1 = width/10;
-  var boundary2 = width*9/10;
-
-  var j1 = height/5;
-  var j2 = height*7/20;
-
-  // if (mx <= boundary1 && j1 <= my && my <= j2) {
-    // mygame.returnfunction();
-  // }
- }
-
-// function touchEnded () {
-  // if (mygame.player.show_direction) {
-    // mygame.player.show_direction = false;
-    // mygame.player.eject(mygame.player.direction);
-    // mygame.player.direction = mygame.player.defaultDirection;
-  // }
-// }
-
 mygame.startover = function() {
   mygame.player.life = mygame.envs.defaultLife;
   mygame.envs.balls        = [];
@@ -132,6 +100,10 @@ mygame.startover = function() {
 }
 
 mygame.kfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push(("k " + mygame.envs.time.toString()));
+  }
+
   if (mygame.envs.intro) {
     return;
   }
@@ -154,11 +126,17 @@ mygame.kfunction = function () {
 }
 
 mygame.sfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push(("s "+mygame.envs.time.toString()));
+  }
   if (mygame.envs.playAnimeOrNot || mygame.envs.intro) {return;}
   mygame.envs.timeStop = !mygame.envs.timeStop;
 }
 
 mygame.mfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push(("m "+mygame.envs.time.toString()));
+  }
   if (mygame.envs.timeStop) {
     return;
   }
@@ -188,6 +166,9 @@ mygame.mfunction = function () {
 }
 
 mygame.bfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push(("b "+mygame.envs.time.toString()));
+  }
   if (mygame.envs.timeStop) {return;}
   if (mygame.envs.superDuper | (mygame.envs.level === 0)) {
     var bs = mygame.envs.balls;
@@ -201,6 +182,9 @@ mygame.bfunction = function () {
 }
 
 mygame.returnfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push(("r "+mygame.envs.time.toString()));
+  }
   if (mygame.envs.timeStop) {
     return;
   }
@@ -234,10 +218,16 @@ mygame.returnfunction = function () {
 }
 
 mygame.nfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push(("n "+mygame.envs.time.toString()));
+  }
   if (mygame.envs.timeStop) {
     return;
   }
 
+  mygame.player.vx           = 0;
+  mygame.player.vy           = 0;
+  mygame.player.x            = width/2 - mygame.player.halfWidth;
   mygame.envs.bricks         = [];
   mygame.envs.balls          = [];
   mygame.envs.pills          = [];
@@ -253,6 +243,9 @@ mygame.nfunction = function () {
 }
 
 mygame.jfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push(("j "+mygame.envs.time.toString()));
+  }
   if (mygame.envs.timeStop) {
     return;
   }
@@ -268,11 +261,17 @@ mygame.jreleasefunction = function () {
 }
 
 mygame.vfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push("v "+mygame.envs.time.toString());
+  }
   if (mygame.envs.intro) {return;}
   mygame.envs.superDuper = !mygame.envs.superDuper;
 }
 
 mygame.dfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push("d "+mygame.envs.time.toString());
+  }
   if (mygame.envs.intro) {return;}
   var val = prompt('\u4f60\u89ba\u5f97\u594e\u4f51\u5e25\u55ce\uff1f', '\u4F10\u4F10\u4F10\u4F10\u4F10\u6728\u5DE5');
   if (val === '\u6211\u89ba\u5f97\u594e\u4f51\u5f88\u5e25') {
@@ -282,3 +281,66 @@ mygame.dfunction = function () {
     mygame.envs.superDuper  = true;
   }
 }
+
+mygame.leftfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push("left "+mygame.envs.time.toString());
+  }
+  if (mygame.envs.intro) {return;}
+  if (mygame.envs.timeStop) {return;}
+  mygame.player.vx = (mygame.player.vx < 0) ? 0 : -5;
+}
+
+mygame.rightfunction = function () {
+  if (!mygame.envs.recording) {
+    mygame.envs.record.push("right "+mygame.envs.time.toString());
+  }
+  if (mygame.envs.intro) {return;}
+  if (mygame.envs.timeStop) {return;}
+  mygame.player.vx = (mygame.player.vx > 0) ? 0 : 5;
+}
+
+mygame.mousefunction = function (mx) {
+  return function () {
+    mouseX = mx;
+  }
+}
+
+// ARCHIVE
+
+// function keyReleased () {
+    // if (mygame.envs.timeStop) {
+      // return;
+    // }
+
+  // if (key === 'J') {
+    // mygame.player.jumpingUp = true;
+    // mygame.player.vy = -5;
+  // }
+
+  // if (key === 'K') {
+    // mygame.player.show_direction = false;
+    // mygame.player.eject(mygame.player.direction);
+    // mygame.player.direction = mygame.player.defaultDirection;
+  // }
+// }
+
+// function touchStarted () {
+  // if (mygame.envs.timeStop) {
+    // return;
+  // }
+
+  // var mx = mouseX;
+  // var my = mouseY;
+
+  // var boundary = width/10;
+  // var j1 = height*3/4;
+
+  // if (mx <= boundary && j1 <= my) {
+    // mygame.envs.moving = !mygame.envs.moving;
+  // }
+ // }
+
+// function touchEnded () {
+  // mygame.envs.moving = false;
+// }

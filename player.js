@@ -24,9 +24,16 @@ function myPlayer() {
   };
 
   player.updatePos = function () {
-    this.x = mouseX - this.halfWidth;
-    this.vx = this.x - this.oldx;
-    this.oldx = this.x;
+    if (!mygame.envs.mobile) {
+      mygame.envs.record.push("mouse " + mygame.envs.time.toString() + " " + mouseX.toString());
+      this.x = mouseX - this.halfWidth;
+      this.vx = this.x - this.oldx;
+      this.oldx = this.x;
+    } else {
+      this.x += this.vx;
+      this.x  = (this.x < 0) ? 0 : this.x;
+      this.x  = (this.x > width*17/20) ? width*17/20 : this.x;
+    }
 
     if (this.jumpingDown) {
       if (this.lower() < height) {
