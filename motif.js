@@ -265,6 +265,9 @@ mygame.motif = function (joueur, collidables) {
     var m = bris.length;
     for (var j = m - 1; j >= 0; j--) {
       if (mygame.nonEmptyHom(coli, bris[j])) {
+        if (coli.has_effect) {
+          coli.dealEffect();
+        }
         if (!bris[j].ballHits[i] || (bris[j].source === mygame.constants.magnet)) {
           mygame.Hom(coli, bris[j]);
           bris[j].ballHits[i] = true;
@@ -288,6 +291,9 @@ mygame.motif = function (joueur, collidables) {
 
     for (var j = m - 1; j >= 0; j--) {
       if (mygame.nonEmptyHom(coli, bris[j])) {
+        if (coli.has_effect) {
+          coli.dealEffect();
+        }
         mygame.Hom(coli, bris[j]);
       } 
     }
@@ -297,6 +303,9 @@ mygame.motif = function (joueur, collidables) {
 
     for (var j = m - 1; j >= 0; j--) {
       if (mygame.nonEmptyHom(coli, bris[j])) {
+        if (coli.has_effect) {
+          coli.dealEffect();
+        }
         mygame.Hom(coli, bris[j]);
       } 
     }
@@ -306,6 +315,9 @@ mygame.motif = function (joueur, collidables) {
 
     for (var j = m - 1; j >= 0; j--) {
       if (mygame.nonEmptyHom(coli, bris[j])) {
+        if (coli.has_effect) {
+          coli.dealEffect();
+        }
         mygame.Hom(coli, bris[j]);
       } 
     }

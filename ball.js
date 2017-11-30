@@ -3,16 +3,17 @@ function ball(x, y, r, vx, vy) {
   newBall.init(0, 0, mygame.constants.elastic, mygame.constants.dynamic, mygame.constants.smallBall);
   newBall.setPos(x, y);
 
-  newBall.xhitted = false;
-  newBall.yhitted = false;
+  newBall.xhitted      = false;
+  newBall.yhitted      = false;
   newBall.playerHitted = false;
+  newBall.has_effect   = false;
 
-  newBall.noMinus = false;
+  newBall.noMinus   = false;
   newBall.invisible = false;
-  newBall.radius = r || 15;
-  newBall.bigBall = false;
-  newBall.vx = vx || 5;
-  newBall.vy = vy || -5;
+  newBall.radius    = r || 15;
+  newBall.bigBall   = false;
+  newBall.vx        = vx || 5;
+  newBall.vy        = vy || -5;
 
   newBall.representation = function () {
     fill(255,0,0);

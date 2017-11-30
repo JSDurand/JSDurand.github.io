@@ -115,6 +115,8 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       mygame.envs.blacks.push(hole(startPos+75, baseH+260, 50, 'black'));
       mygame.envs.blacks.push(hole(startPos+5.5*mysize, baseH+260, 50, 'black'));
       mygame.envs.blacks.push(hole(width/2, baseH+300, 50, 'black'));
+      var thrower = mygame.thrower(width/4, height/2,15,0,0);
+      mygame.envs.balls.push(thrower);
       break;
     case 7:
       mygame.envs.animeNo = 1;
@@ -199,6 +201,7 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
 
       var rotbrick = rotationBrick(width/3,height*2/3,200,30);
       mygame.envs.rotbricks.push(rotbrick);
+
       // mygame.envs.obs.push(obstacles(width/2-20, height/2-50, 100, 40, 1.1));
       // mygame.envs.bricks.push(invbrick_two);
       // mygame.envs.bricks.push(invbrick_three);

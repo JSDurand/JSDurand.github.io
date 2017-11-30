@@ -34,3 +34,44 @@ function bomb(x, y, radius) {
 
   return newBomb;
 }
+
+mygame.thrower = function (x, y, radius) {
+  var newBall        = ball(x, y, radius, 0, 0);
+  newBall.protected  = false;
+  newBall.generation = 1;
+  newBall.has_effect = true; // this is a bomb.
+  newBall.dealEffect = function () {
+    var thisBall = this;
+    if (this.generation < 4 && !this.protected) {
+      var old_generation = this.generation;
+      this.generation = 4;
+      setTimeout(function () {thisBall.eaten = true;}, 2000);
+      var newBrick = brick(this.x, this.y, 1, 1, 0.9);
+      newBrick.charge = 20000;
+      newBrick.magnetRange = 100;
+      newBrick.charged = true;
+      // newBrick.representation = function () {return;};
+      newBrick.invisible = true;
+      mygame.envs.bricks.push(newBrick);
+      setTimeout(function () {newBrick.invisible = false;}, 1000);
+      for (var i = 0; i < 30; i++) {
+        var bullet = mygame.thrower(this.x + this.radius * cos(i*12), this.y + this.radius*sin(i*12), 15, 0, 0);
+        bullet.generation = old_generation + 1;
+        bullet.protected  = true;
+        bullet.vx         = 0;
+        bullet.vy         = 0;
+        bullet.noMinus    = true; // Don't subtract score
+        bullet.eaten      = false;
+
+        bullet.representation = function() {
+          fill('#075ef4');
+          ellipse(this.x, this.y, this.radius, this.radius);
+        }
+        setTimeout(function () {bullet.protected = false;}, 1500);
+
+        mygame.envs.balls.push(bullet);
+      }
+    }
+  };
+  return newBall;
+};
