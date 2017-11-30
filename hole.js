@@ -31,5 +31,7 @@ function hole (x, y, radius, color) {
     ellipse(this.x, this.y, this.radius, this.radius);
   }
 
+  newHole.death = false;
+
   return newHole;
 }

@@ -46,14 +46,17 @@ mygame.thrower = function (x, y, radius) {
       var old_generation = this.generation;
       this.generation = 4;
       setTimeout(function () {thisBall.eaten = true;}, 2000);
-      var newBrick = brick(this.x, this.y, 1, 1, 0.9);
-      newBrick.charge = 20000;
-      newBrick.magnetRange = 100;
-      newBrick.charged = true;
+      var tempHole = hole(this.x, this.y, 10, 'white');
+      // tempHole.representation = function () {return;};
+      setTimeout(function () {tempHole.death = true;}, 1000);
+      // var newBrick = brick(this.x, this.y, 100, 100, 0.9);
+      // newBrick.charge = 20000;
+      // newBrick.magnetRange = 100;
+      // newBrick.charged = true;
       // newBrick.representation = function () {return;};
-      newBrick.invisible = true;
-      mygame.envs.bricks.push(newBrick);
-      setTimeout(function () {newBrick.invisible = false;}, 1000);
+      // newBrick.invisible = true;
+      mygame.envs.mysterious_holes.push(tempHole);
+      // setTimeout(function () {newBrick.invisible = false;}, 1000);
       for (var i = 0; i < 30; i++) {
         var bullet = mygame.thrower(this.x + this.radius * cos(i*12), this.y + this.radius*sin(i*12), 15, 0, 0);
         bullet.generation = old_generation + 1;

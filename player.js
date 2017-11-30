@@ -63,6 +63,7 @@ function myPlayer() {
   player.show_direction   = false;
   player.defaultDirection = 30;
   player.direction        = 30;
+  player.throwing         = false;
 
   player.choose_direction = function () {
     this.show_direction = true;
@@ -70,7 +71,7 @@ function myPlayer() {
   }
 
   player.eject = function (direction) {
-    var new_ball = ball(this.midX(), this.upper() - this.height);
+    var new_ball = (this.throwing) ? mygame.thrower(this.midX(), this.upper() - this.height) : ball(this.midX(), this.upper() - this.height);
     new_ball.vx = 5*cos(direction);
     new_ball.vy = -5*sin(direction);
     mygame.envs.balls.push(new_ball);

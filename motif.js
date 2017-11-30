@@ -331,6 +331,15 @@ mygame.motif = function (joueur, collidables) {
       } 
     }
 
+    bris = mygame.envs.mysterious_holes;
+    m    = bris.length;
+
+    for (var j = m - 1; j >= 0; j--) {
+      if (mygame.nonEmptyHom(coli, bris[j])) {
+        mygame.Hom(coli, bris[j]);
+      }
+    }
+
     var holes = mygame.envs.blacks;
     var outs  = bris;
     var m     = holes.length;

@@ -18,10 +18,10 @@ function gameLoop () {
     for (var i = 0; i < mygame.envs.unbreakables.length; i++) {
       mygame.envs.unbreakables[i].representation();
     }
-    for (var i = 0; i < mygame.envs.blacks.length; i++) {
+    for (var i = mygame.envs.blacks.length - 1; i >= 0; i--) {
       mygame.envs.blacks[i].representation();
     }
-    for (var i = 0; i < mygame.envs.whites.length; i++) {
+    for (var i = mygame.envs.whites.length - 1; i >= 0; i--) {
       mygame.envs.whites[i].representation();
     }
     for (var i = 0; i < mygame.envs.obs.length; i++) {
@@ -57,6 +57,14 @@ function gameLoop () {
   for (var i = mygame.collidables.length - 1; i >= 0; i--) {
     mygame.collidables[i].updatePos();
     mygame.collidables[i].representation();
+  }
+
+  for (var i = mygame.envs.mysterious_holes.length - 1; i >= 0; i--) {
+    if (mygame.envs.mysterious_holes[i].death) {
+      mygame.envs.mysterious_holes.splice(i);
+    } else {
+      mygame.envs.mysterious_holes[i].representation();
+    }
   }
 
   if (mygame.displayLaser) {

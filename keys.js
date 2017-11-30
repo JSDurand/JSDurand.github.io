@@ -1,4 +1,8 @@
 function keyPressed() {
+  if (key === 'T') {
+    mygame.player.throwing = !mygame.player.throwing;
+  }
+
   if (key == 'K') {
     mygame.kfunction();
   }

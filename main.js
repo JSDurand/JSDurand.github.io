@@ -19,6 +19,7 @@ mygame.envs = {
   unbreakables : [],
   blacks : [],
   whites : [],
+  mysterious_holes : [], // mysterious holes to aid the game function
   obs : [],
   finishExplain : false,
   randomAgain : false,
