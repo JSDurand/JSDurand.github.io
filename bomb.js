@@ -38,7 +38,11 @@ function bomb(x, y, radius) {
 mygame.thrower = function (x, y, radius) {
   var newBall        = ball(x, y, radius, 0, 0);
   newBall.protected  = false;
-  newBall.generation = 1;
+  newBall.generation = 3;
+  newBall.representation = function () {
+    fill(255,255,0);
+    ellipse(this.x, this.y, this.radius, this.radius);
+  }
   newBall.has_effect = true; // this is a bomb.
   newBall.dealEffect = function () {
     var thisBall = this;
@@ -66,10 +70,10 @@ mygame.thrower = function (x, y, radius) {
         bullet.noMinus    = true; // Don't subtract score
         bullet.eaten      = false;
 
-        bullet.representation = function() {
-          fill('#075ef4');
-          ellipse(this.x, this.y, this.radius, this.radius);
-        }
+        // bullet.representation = function() {
+          // fill('#075ef4');
+          // ellipse(this.x, this.y, this.radius, this.radius);
+        // }
         setTimeout(function () {bullet.protected = false;}, 1500);
 
         mygame.envs.balls.push(bullet);
