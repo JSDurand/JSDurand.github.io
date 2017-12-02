@@ -3,13 +3,18 @@ function brick(x, y, hsize, vsize, coe) {
   newBrick.init(hsize, vsize, mygame.constants.elastic, mygame.constants.basic);
 
   newBrick.setPos(x, y);
-  newBrick.off = false;
+  newBrick.off            = false;
+  newBrick.life           = mygame.constants.defaultBricksLife;
   newBrick.representation = function () {
     fill(0,255,0);
     rect(this.x, this.y, this.width, this.height);
+    fill(255,0,0);
+    textSize(this.height*2/3);
+    var textWidth = mygame.can.canvas.getContext('2d').measureText(this.life).width;
+    text(this.life, this.midX() - textWidth/2, this.midY() + this.height/4);
   }
 
-  newBrick.ballHits = [];
+  newBrick.ballHits       = [];
 
   /*
    * var len = mygame.envs.balls.length;

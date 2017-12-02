@@ -19,7 +19,8 @@ mygame.constants = {
   smallBall : 'small ball',
   bigBall : 'big ball',
   defaultWidth : 50, // for bricks
-  defaultHeight : 25
+  defaultHeight : 25,
+  defaultBricksLife : 1, // the default life for bricks
 };
 
 mygame.objects = {
@@ -278,8 +279,10 @@ mygame.motif = function (joueur, collidables) {
         if (typeof bris[j].effect === 'undefined') {}
         else {bris[j].eject();}
         if (bris[j].invisible) {}
-        else {
+        else if (bris[j].life === 1) {
           bris.splice(j, 1);
+        } else {
+          bris[j].life -= 1;
         }
         continue;
       }
@@ -341,7 +344,7 @@ mygame.motif = function (joueur, collidables) {
     }
 
     var holes = mygame.envs.blacks;
-    var outs  = bris;
+    var outs  = mygame.envs.whites;
     var m     = holes.length;
 
     for (var j = m - 1; j >= 0; j--) {

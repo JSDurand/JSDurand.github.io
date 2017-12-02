@@ -6,6 +6,10 @@ function pill(x, y, effect) {
   newPill.representation = function () {
     fill(255,128,0);
     rect(this.x, this.y, this.width, this.height);
+    fill(0);
+    textSize(this.height*2/3);
+    var textWidth = mygame.can.canvas.getContext('2d').measureText(this.life).width;
+    text(this.life, this.midX() - textWidth/2, this.midY() + this.height/4);
   };
 
   newPill.eject = function () {
