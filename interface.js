@@ -7,6 +7,19 @@ function startInterface () {
   var t_inter = height/10;
   var t_base  = height*7/20;
 
+  if (typeof mygame.player.character.skill.eject === 'undefined') {
+    var skill = prompt("Choose a skill:\n1 for explosion.","1")
+    switch (skill) {
+      case '1':
+        mygame.player.character.skill.eject = mygame.explosion;
+        alert('Now throwing bombs!');
+        break;
+      default:
+        alert("No such skill!");
+        break;
+    }
+  }
+
   if (mygame.envs.bricks.length !== 0) {
     mygame.clear();
   }

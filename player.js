@@ -55,15 +55,17 @@ function myPlayer() {
     }
   };
 
-  player.life             = mygame.envs.defaultLife;
-  player.oldx             = player.x;
-  player.oldy             = player.y;
-  player.vx               = 0;
-  player.vy               = 0;
-  player.show_direction   = false;
-  player.defaultDirection = 30;
-  player.direction        = 30;
-  player.throwing         = false;
+  player.life                   = mygame.envs.defaultLife;
+  player.oldx                   = player.x;
+  player.oldy                   = player.y;
+  player.vx                     = 0;
+  player.vy                     = 0;
+  player.show_direction         = false;
+  player.defaultDirection       = 30;
+  player.direction              = 30;
+  player.throwing               = false;
+  player.character              = mygame.character();
+  player.character.skill.status = 'off';
 
   player.choose_direction = function () {
     this.show_direction = true;

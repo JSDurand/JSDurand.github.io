@@ -206,7 +206,10 @@ mygame.returnfunction = function () {
     if (mygame.envs.level <= mygame.envs.maxLevel) {
       if (mygame.envs.bricks.length !== 0) {
         // mygame.player.life = mygame.player.life <= 0 ? mygame.player.life : 1;
-        alert('\u8B66\u544A:\u4E0D\u8981\u4E82\u4F86!')
+        // We can deploy the skill ability here.
+        // alert('\u8B66\u544A:\u4E0D\u8981\u4E82\u4F86!')
+        mygame.player.character.skill.eject();
+        mygame.player.character.skill.status = (mygame.player.character.skill.status === "on") ? "off" : "on";
       } else {
          if (mygame.envs.level < mygame.envs.maxLevel) {
            mygame.player.life = mygame.envs.defaultLife;

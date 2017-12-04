@@ -70,7 +70,9 @@ function gameLoop () {
   if (mygame.displayLaser) {
     var x = mygame.displayLaserAt;
     stroke(255,0,0);
+    strokeWeight(5);
     line(x, 0, x, height);
+    strokeWeight(1);
     noStroke();
     for (var i = mygame.envs.bricks.length - 1; i >= 0; i--) {
       var bri = mygame.envs.bricks[i];
@@ -109,12 +111,12 @@ function myshuffle(array) {
 mygame.showScore = function () {
   fill(255,255,0);
 
-  textSize(40);
+  textSize(width/40);
 
   if (mygame.envs.timeStop) {
-    text("\u6642\u9593\u66ab\u505c!", width-250, 50);
+    text("\u6642\u9593\u66ab\u505c!", width*17/20, height/20);
   }
   // text("direction:\t" + mygame.player.direction + "bool:\t" + mygame.player.show_direction, 50, 300);
 
-  text("\u95dc\u5361:\t" + mygame.envs.level + "\n\u751f\u547d:\t" + mygame.player.life + "\n\u5834\u4e0a\u7684\u7403:\t" + mygame.envs.balls.length, 50, 50);
+  text("\u95dc\u5361:\t" + mygame.envs.level + "\n\u751f\u547d:\t" + mygame.player.life + "\n\u5834\u4e0a\u7684\u7403:\t" + mygame.envs.balls.length + "\nSkill:\t" + mygame.player.character.skill.status , width/20, width/20);
 }

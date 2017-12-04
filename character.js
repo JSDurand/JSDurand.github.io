@@ -3,17 +3,17 @@
 // different professions can choose various different skills.
 // This will make the game more diverse and playable, I hope.
 
-function character () {
+mygame.character = function () {
   return {
-    profession : {},
-    level      : 1,
-    defense    : 0,
-    attack     : 0,
+    skill   : {},
+    level   : 1,
+    defense : 0,
+    attack  : 0,
   };
 }
 
 // kind is an integer representing different professions
-function newProfession (kind) {
+mygame.newProfession = function (kind) {
   return {
     name: "profession name",
     skills: {},
@@ -21,3 +21,7 @@ function newProfession (kind) {
 }
 
 // mygame.all_skills.magnet = {a:1};
+
+mygame.explosion = function () {
+  mygame.player.throwing = !mygame.player.throwing;
+}
