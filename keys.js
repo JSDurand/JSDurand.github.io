@@ -150,6 +150,8 @@ mygame.mfunction = function () {
   var val = prompt('\u9078\u64C7\u95DC\u5361', mygame.envs.maxLevel);
   if (isNaN(parseFloat(val))) {return;}
 
+  mygame.startover();
+
   mygame.player.life = mygame.envs.defaultLife;
   mygame.envs.playAnimeOrNot = false;
   mygame.envs.timing = 0;

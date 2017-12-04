@@ -13,17 +13,17 @@ function bomb(x, y, radius) {
   newBomb.effect    = 'BOMB';
   newBomb.invisible = true;
   newBomb.eject     = function() {
-    var thisBomb = this;
-    this.charge = 20000;
-    this.magnetRange = 100;
-    this.charged = true;
-    this.eject = function () {};
-    this.representation = function () {};
-    setTimeout(function() {thisBomb.invisible = false;}, 1000);
+    // var thisBomb = this;
+    // this.charge = 20000;
+    // this.magnetRange = 100;
+    // this.charged = true;
+    // this.eject = function () {};
+    // this.representation = function () {};
+    this.invisible = false;
     for (var i = 0; i < 30; i++) {
       var bullet = ball(this.midX() + newBomb.radius * cos(i*12), this.midY() + newBomb.radius*sin(i*12), 15, 0, 0);
-      bullet.vx      = 0;
-      bullet.vy      = 0;
+      bullet.vx      = 20 * cos(i*12);
+      bullet.vy      = 20 * sin(i*12);
       bullet.noMinus = true; // Don't subtract score
       bullet.eaten   = false;
 
@@ -42,7 +42,7 @@ function bomb(x, y, radius) {
 mygame.thrower = function (x, y, radius) {
   var newBall        = ball(x, y, radius, 0, 0);
   newBall.protected  = false;
-  newBall.generation = 3;
+  newBall.generation = 1;
   newBall.representation = function () {
     fill(255,255,0);
     ellipse(this.x, this.y, this.radius, this.radius);
@@ -53,24 +53,25 @@ mygame.thrower = function (x, y, radius) {
     if (this.generation < 4 && !this.protected) {
       var old_generation = this.generation;
       this.generation = 4;
-      setTimeout(function () {thisBall.eaten = true;}, 2000);
-      var tempHole = hole(this.x, this.y, 10, 'white');
+      this.eaten = true;
+      // setTimeout(function () {thisBall.eaten = true;}, 2000);
+      // var tempHole = hole(this.x, this.y, 10, 'white');
       // tempHole.representation = function () {return;};
-      setTimeout(function () {tempHole.death = true;}, 1000);
+      // setTimeout(function () {tempHole.death = true;}, 1000);
       // var newBrick = brick(this.x, this.y, 100, 100, 0.9);
       // newBrick.charge = 20000;
       // newBrick.magnetRange = 100;
       // newBrick.charged = true;
       // newBrick.representation = function () {return;};
       // newBrick.invisible = true;
-      mygame.envs.mysterious_holes.push(tempHole);
+      // mygame.envs.mysterious_holes.push(tempHole);
       // setTimeout(function () {newBrick.invisible = false;}, 1000);
       for (var i = 0; i < 30; i++) {
         var bullet = mygame.thrower(this.x + this.radius * cos(i*12), this.y + this.radius*sin(i*12), 15, 0, 0);
-        bullet.generation = old_generation + 1;
+        bullet.generation = 4;
         bullet.protected  = true;
-        bullet.vx         = 0;
-        bullet.vy         = 0;
+        bullet.vx         = 20 * cos(i*12);
+        bullet.vy         = 20 * sin(i*12);
         bullet.noMinus    = true; // Don't subtract score
         bullet.eaten      = false;
 

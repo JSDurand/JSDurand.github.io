@@ -20,7 +20,7 @@ mygame.constants = {
   bigBall : 'big ball',
   defaultWidth : 50, // for bricks
   defaultHeight : 25,
-  defaultBricksLife : 1, // the default life for bricks
+  defaultBricksLife : 2, // the default life for bricks
 };
 
 mygame.objects = {
@@ -306,9 +306,9 @@ mygame.motif = function (joueur, collidables) {
 
     for (var j = m - 1; j >= 0; j--) {
       if (mygame.nonEmptyHom(coli, bris[j])) {
-        if (coli.has_effect) {
-          coli.dealEffect();
-        }
+        // if (coli.has_effect) {
+          // coli.dealEffect();
+        // }
         mygame.Hom(coli, bris[j]);
       } 
     }
