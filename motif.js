@@ -20,7 +20,7 @@ mygame.constants = {
   bigBall : 'big ball',
   defaultWidth : 50, // for bricks
   defaultHeight : 25,
-  defaultBricksLife : 100, // the default life for bricks
+  defaultBricksLife : 30, // the default life for bricks
 };
 
 mygame.objects = {

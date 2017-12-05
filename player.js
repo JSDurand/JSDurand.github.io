@@ -15,7 +15,11 @@ function myPlayer() {
     rect(this.x, this.y, this.width, this.height);
     if (this.show_direction) {
       strokeWeight(5);
-      stroke(200,0,0);
+      if (mygame.player.throwing) {
+        stroke(200,200,0);
+      } else {
+        stroke(200,0,0);
+      }
       line(this.x + this.width/2, this.y, this.x+ this.width/2 + 60*cos(this.direction), this.y - 60*sin(this.direction));
       this.choose_direction();
       strokeWeight(1);
@@ -77,6 +81,7 @@ function myPlayer() {
     new_ball.vx  = 5*cos(direction);
     new_ball.vy  = -5*sin(direction);
     mygame.envs.balls.push(new_ball);
+    this.life -= (this.throwing) ? 1 : 0;
     // mygame.comb_hitted_information();
   };
 

@@ -49,7 +49,8 @@ mygame.thrower = function (x, y, radius) {
   newBall.protected      = false;
   newBall.generation     = 1;
   newBall.representation = function () {
-    fill(255,255,0);
+    var c = 28 * (4 - this.generation) * (this.generation + 2); // quadratic curve decaying from 255 to 0;
+    fill(255,c,0);
     ellipse(this.x, this.y, this.radius, this.radius);
   }
   newBall.has_effect = true; // this is a bomb.
@@ -71,12 +72,14 @@ mygame.thrower = function (x, y, radius) {
       // newBrick.invisible = true;
       // mygame.envs.mysterious_holes.push(tempHole);
       // setTimeout(function () {newBrick.invisible = false;}, 1000);
-      for (var i = 0; i < 30; i++) {
-        var bullet = mygame.thrower(this.x + 50 * cos(i*12), this.y + 50 * sin(i*12), 15, 0, 0);
+      var number_of_balls = 10;
+      for (var i = 0; i < number_of_balls; i++) {
+        var angle         = 360 / number_of_balls;
+        var bullet        = mygame.thrower(this.x + 50 * cos(i*angle), this.y + 50 * sin(i*angle), 15, 0, 0);
         bullet.generation = old_generation + 1;
         bullet.protected  = true;
-        bullet.vx         = 20 * cos(i*12);
-        bullet.vy         = 20 * sin(i*12);
+        bullet.vx         = 20 * cos(i*angle);
+        bullet.vy         = 20 * sin(i*angle);
         bullet.noMinus    = true; // Don't subtract score
         bullet.eaten      = false;
         bullet.no_collide = true;
