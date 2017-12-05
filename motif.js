@@ -276,7 +276,7 @@ mygame.motif = function (joueur, collidables) {
         if ((bris[j].source === mygame.constants.magnet) && coli.magnetized) {
           continue;
         }
-        if (typeof bris[j].effect === 'undefined') {}
+        if (typeof bris[j].effect === 'undefined' || bris[j].life > 1) {}
         else {bris[j].eject();}
         if (bris[j].invisible) {}
         else if (bris[j].life === 1) {
