@@ -7,6 +7,7 @@ function ball(x, y, r, vx, vy) {
   newBall.yhitted      = false;
   newBall.playerHitted = false;
   newBall.has_effect   = false;
+  newBall.no_collide   = false;
 
   newBall.noMinus   = false;
   newBall.invisible = false;

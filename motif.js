@@ -20,7 +20,7 @@ mygame.constants = {
   bigBall : 'big ball',
   defaultWidth : 50, // for bricks
   defaultHeight : 25,
-  defaultBricksLife : 2, // the default life for bricks
+  defaultBricksLife : 100, // the default life for bricks
 };
 
 mygame.objects = {
@@ -229,6 +229,11 @@ function magneticMapping (X, Y) {
 
 mygame.motif = function (joueur, collidables) {
   var l = collidables.length;
+
+  // mygame.envs.hittedArray = [];
+  // for (var i = l - 1; i >= 0; i--) {
+    // mygame.envs.hittedArray.push([]);
+  // }
   outer:
   for (var i = l - 1; i >= 0; i--) {
     var coli = collidables[i];
@@ -237,12 +242,12 @@ mygame.motif = function (joueur, collidables) {
         mygame.player.life--;
       }
       collidables.splice(i, 1);
-      for (var j = 0; j < mygame.envs.hittedArray.length; j++) {
-        mygame.envs.hittedArray[j] = [];
-        for (var k = j + 1; k < mygame.envs.hittedArray.length; k++) {
-          mygame.envs.hittedArray[j].push(false);
-        }
-      }
+      // for (var j = 0; j < mygame.envs.hittedArray.length; j++) {
+        // mygame.envs.hittedArray[j] = [];
+        // for (var k = j + 1; k < mygame.envs.hittedArray.length; k++) {
+          // mygame.envs.hittedArray[j].push(false);
+        // }
+      // }
       /*
        * if (collidables.length !== 0 && i !== l - 1) {
        *   for (var j = i - 1; j >= 0; j++) {
@@ -365,18 +370,23 @@ mygame.motif = function (joueur, collidables) {
 
 mygame.ball_collide = function (balls_list) {
   var len = balls_list.length;
+  mygame.envs.hittedArray = [];
+  for (var i = len - 1; i >= 0; i--) {
+    mygame.envs.hittedArray.push([]);
+  }
   for (var i = 0; i < len; i++) {
     for (var j = i + 1; j < len; j++) {
+      mygame.envs.hittedArray[i].push(false);
 
       // Detect if two balls are hitted
-      if (typeof mygame.envs.hittedArray[i] === 'undefined') {
-        mygame.envs.hittedArray[i] = [];
-        break;
-      }
-      if (typeof mygame.envs.hittedArray[i][j - i - 1] === 'undefined') {
-        mygame.envs.hittedArray[i][j - i - 1] = false;
-        break;
-      }
+      // if (typeof mygame.envs.hittedArray[i] === 'undefined') {
+        // mygame.envs.hittedArray[i] = [];
+        // break;
+      // }
+      // if (typeof mygame.envs.hittedArray[i][j - i - 1] === 'undefined') {
+        // mygame.envs.hittedArray[i][j - i - 1] = false;
+        // break;
+      // }
       /*
        * if (typeof mygame.envs.hittedArray[i][j - i - 1] === 'undefined') {
        *   continue;
@@ -391,6 +401,10 @@ mygame.ball_collide = function (balls_list) {
       var mass_dif = mass_one - mass_two;
 
       var nor = dist(one_ball.x, one_ball.y, two_ball.x, two_ball.y);
+
+      if (one_ball.no_collide || two_ball.no_collide) {
+        continue;
+      }
 
       if (nor >= (one_ball.radius + two_ball.radius)*2/3) {
         mygame.envs.hittedArray[i][j - i - 1] = false;

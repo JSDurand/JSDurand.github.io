@@ -74,21 +74,25 @@ function myPlayer() {
 
   player.eject = function (direction) {
     var new_ball = (this.throwing) ? mygame.thrower(this.midX(), this.upper() - this.height) : ball(this.midX(), this.upper() - this.height);
-    new_ball.vx = 5*cos(direction);
-    new_ball.vy = -5*sin(direction);
+    new_ball.vx  = 5*cos(direction);
+    new_ball.vy  = -5*sin(direction);
     mygame.envs.balls.push(new_ball);
-    var len = mygame.envs.balls.length;
-    var bris = mygame.envs.bricks;
-    var bri_len = bris.length;
-    for (var i = 0; i < len - 1; i++) {
-      mygame.envs.hittedArray[i].push(false);
-    }
-    mygame.envs.hittedArray[len - 1] = [];
-
-    for (var i = 0; i < bri_len; i++) {
-      bris[i].ballHits[len - 1] = false;
-    }
+    // mygame.comb_hitted_information();
   };
 
   return player;
+}
+
+mygame.comb_hitted_information = function () {
+  // var len     = mygame.envs.balls.length;
+  var bris    = mygame.envs.bricks;
+  var bri_len = bris.length;
+  // for (var i = 0; i < len - 1; i++) {
+    // mygame.envs.hittedArray[i].push(false);
+  // }
+  // mygame.envs.hittedArray[len - 1] = [];
+
+  for (var i = 0; i < bri_len; i++) {
+    bris[i].ballHits.push(false);
+  }
 }
