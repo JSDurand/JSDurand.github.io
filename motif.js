@@ -268,12 +268,15 @@ mygame.motif = function (joueur, collidables) {
     }
 
     var bris = mygame.envs.bricks;
-    var m = bris.length;
+    var m    = bris.length;
     for (var j = m - 1; j >= 0; j--) {
+      // bris[j].ballHits = [];
+      // for (var k = 0; k < l; l++) {
+        // bris[j].ballHits.push(false);
+      // }
+      // console.log('ya');
+      // return;
       if (mygame.nonEmptyHom(coli, bris[j])) {
-        if (coli.has_effect) {
-          coli.dealEffect();
-        }
         if (!bris[j].ballHits[i] || (bris[j].source === mygame.constants.magnet)) {
           mygame.Hom(coli, bris[j]);
           bris[j].ballHits[i] = true;
@@ -287,7 +290,11 @@ mygame.motif = function (joueur, collidables) {
         else if (bris[j].life === 1) {
           bris.splice(j, 1);
         } else {
-          bris[j].life -= 1;
+          bris[j].life--;
+        }
+        if (coli.has_effect) {
+          coli.dealEffect();
+          break;
         }
         continue;
       }
@@ -462,9 +469,14 @@ mygame.ball_collide = function (balls_list) {
 
 mygame.check_bricks = function (bricks_list) {
   var l = bricks_list.length;
-  for (var i = l - 1; i > -1; i--)
-    if (bricks_list[i].off)
+  for (var i = l - 1; i > -1; i--) {
+    if (bricks_list[i].off) {
       mygame.player.life = 0;
+    }
+    if (bricks_list[i].life === 0) {
+      bricks_list.splice(i, 1);
+    }
+  }
 }
 
 mygame.ball_normal_rect_intersection = function (obj1, obj2) {

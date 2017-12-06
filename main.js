@@ -39,6 +39,16 @@ mygame.envs = {
 
 mygame.envs.mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+mygame.recordless_envs = {};
+
+mygame.save_recordless_envs = function () {
+  for (property in mygame.envs) {
+    if (property !== "record") {
+      mygame.recordless_envs[property] = mygame.envs[property];
+    }
+  }
+}
+
 /*
  * function preload() {
  *   myfont = loadFont('Georgia',fontReady);
@@ -69,6 +79,7 @@ function setup () {
 }
 
 function draw() {
+  mygame.save_recordless_envs();
   mygame.envs.time += 30;
   if (mygame.envs.intro) {
     startInterface();

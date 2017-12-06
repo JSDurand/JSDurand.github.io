@@ -68,6 +68,7 @@ function myPlayer() {
   player.defaultDirection       = 30;
   player.direction              = 30;
   player.throwing               = false;
+  player.laser_ability          = false;
   player.character              = mygame.character();
   player.character.skill.status = 'off';
 
@@ -77,10 +78,17 @@ function myPlayer() {
   }
 
   player.eject = function (direction) {
-    var new_ball = (this.throwing) ? mygame.thrower(this.midX(), this.upper() - this.height) : ball(this.midX(), this.upper() - this.height);
+    if (this.throwing) {
+      var new_ball = mygame.thrower(this.midX(), this.upper() - this.height);
+    } else if (this.laser_ability) {
+      var new_ball = mygame.laser_ball(this.midX(), this.upper() - this.height);
+    } else {
+      var new_ball = ball(this.midX(), this.upper() - this.height);
+    }
     new_ball.vx  = 5*cos(direction);
     new_ball.vy  = -5*sin(direction);
     mygame.envs.balls.push(new_ball);
+    mygame.comb_hitted_information();
     this.life -= (this.throwing) ? 1 : 0;
     // mygame.comb_hitted_information();
   };

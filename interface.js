@@ -8,11 +8,15 @@ function startInterface () {
   var t_base  = height*7/20;
 
   if (typeof mygame.player.character.skill.eject === 'undefined') {
-    var skill = prompt("Choose a skill:\n1 for explosion.","1")
+    var skill = prompt("Choose a skill:\n1 for explosion.\n2 for laser ball.","1")
     switch (skill) {
       case '1':
         mygame.player.character.skill.eject = mygame.explosion;
-        alert('Now throwing bombs!');
+        alert('Now throw bombs!');
+        break;
+      case '2':
+        mygame.player.character.skill.eject = mygame.laser_ability;
+        alert('Now launch laser ball!');
         break;
       default:
         alert("No such skill!");

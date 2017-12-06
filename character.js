@@ -13,15 +13,19 @@ mygame.character = function () {
 }
 
 // kind is an integer representing different professions
-mygame.newProfession = function (kind) {
-  return {
-    name: "profession name",
-    skills: {},
-  };
-}
+// mygame.newProfession = function (kind) {
+  // return {
+    // name: "profession name",
+    // skills: {},
+  // };
+// }
 
 // mygame.all_skills.magnet = {a:1};
 
 mygame.explosion = function () {
   mygame.player.throwing = !mygame.player.throwing;
+}
+
+mygame.laser_ability = function () {
+  mygame.player.laser_ability = !mygame.player.laser_ability;
 }

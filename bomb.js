@@ -37,6 +37,7 @@ function bomb(x, y, radius) {
       }
 
       mygame.envs.balls.push(bullet);
+      mygame.comb_hitted_information();
       // mygame.comb_hitted_information();
     }
   };
@@ -95,7 +96,8 @@ mygame.thrower = function (x, y, radius) {
         // setTimeout(function () {change_bullet_protected(bullet);}, 1500);
 
         mygame.envs.balls.push(bullet);
-        // mygame.comb_hitted_information();
+        mygame.comb_hitted_information();
+          // mygame.comb_hitted_information();
       }
     }
   };

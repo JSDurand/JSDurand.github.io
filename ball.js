@@ -8,6 +8,7 @@ function ball(x, y, r, vx, vy) {
   newBall.playerHitted = false;
   newBall.has_effect   = false;
   newBall.no_collide   = false;
+  newBall.laser        = false;
 
   newBall.noMinus   = false;
   newBall.invisible = false;
@@ -92,4 +93,57 @@ function ball(x, y, r, vx, vy) {
   }
 
   return newBall;
+}
+
+mygame.laser_ball = function (x, y, r, vx, vy) {
+  var temp_ball        = ball(x, y, r, vx, vy);
+  temp_ball.displayLaser   = false;
+  temp_ball.displayLaserAt = x + vx;
+  temp_ball.has_effect     = true; // this is a laser ball.
+  temp_ball.dealEffect     = function () {
+    var x               = this.x + this.vx;
+    this.displayLaser   = true;
+    this.displayLaserAt = x;
+    setTimeoutWithClosure(stopLaserBall, temp_ball, 1500);
+    for (var i = mygame.envs.bricks.length - 1; i >= 0; i--) {
+      var bri = mygame.envs.bricks[i];
+      if (abs(bri.midX() - x) < bri.halfWidth) {
+        mygame.envs.bricks[i].life--;
+        // mygame.envs.bricks.splice(i, 1);
+      }
+    }
+  }
+  temp_ball.updatePos = function () {
+    if (this.vx > mygame.envs.maximum) {this.vx = mygame.envs.maximum;}
+    else if (this.vx < -mygame.envs.maximum) {
+      this.vx = -mygame.envs.maximum;
+    }
+
+    if (this.vy > mygame.envs.maximum) {this.vy = mygame.envs.maximum;}
+    else if (this.vy < -mygame.envs.maximum) {
+      this.vy = -mygame.envs.maximum;
+    }
+
+    this.x += this.vx;
+    this.y += this.vy;
+
+    if (this.target === 'basic') {}
+    else if (this.target === 'dynamic') {
+      this.vy += this.ay + mygame.envs.gravity;
+    } else {}
+
+    if (this.displayLaser) {
+      var x = this.displayLaserAt;
+      stroke(255,0,0);
+      strokeWeight(5);
+      line(x, 0, x, height);
+      strokeWeight(1);
+      noStroke();
+    }
+  }
+  return temp_ball;
+}
+
+function stopLaserBall(b) {
+  b.displayLaser = false;
 }
