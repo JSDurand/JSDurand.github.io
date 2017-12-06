@@ -4,6 +4,7 @@ function brick(x, y, hsize, vsize, coe) {
 
   newBrick.setPos(x, y);
   newBrick.off            = false;
+  newBrick.invisible      = false;
   newBrick.life           = mygame.constants.defaultBricksLife;
   newBrick.representation = function () {
     fill(0,255,0);

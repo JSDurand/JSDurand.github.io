@@ -108,4 +108,15 @@ mygame.comb_hitted_information = function () {
   for (var i = 0; i < bri_len; i++) {
     bris[i].ballHits.push(false);
   }
+
+  var rot_bris    = mygame.envs.rotbricks;
+  var rot_bri_len = rot_bris.length;
+  // for (var i = 0; i < len - 1; i++) {
+    // mygame.envs.hittedArray[i].push(false);
+  // }
+  // mygame.envs.hittedArray[len - 1] = [];
+
+  for (var i = 0; i < rot_bri_len; i++) {
+    rot_bris[i].ballHits.push(false);
+  }
 }

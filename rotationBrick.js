@@ -1,8 +1,9 @@
 // make the bricks rotate!
 
 function rotationBrick (x, y, hsize, vsize, coe) {
-  var bri = brick(x, y, hsize, vsize, coe);
-  bri.angle = 0;
+  var bri       = brick(x, y, hsize, vsize, coe);
+  bri.angle     = 0;
+  bri.invisible = true;
 
   bri.updatePos = function () {
     this.angle += 1;
@@ -19,7 +20,8 @@ function rotationBrick (x, y, hsize, vsize, coe) {
     textSize(this.height*2/3);
     var life_text = (this.invisible) ? "\u221E" : this.life.toString();
     var textWidth = mygame.can.canvas.getContext('2d').measureText(life_text).width;
-    text(life_text, this.midX() - textWidth/2, this.midY() + this.height/4);
+    // var textWidth = mygame.can.canvas.getContext('2d').measureText(this.life).width;
+    text(life_text, -textWidth/2, this.height/4);
     rotate(-1*this.angle);
     translate(-1*midx, -1*midy);
   }
