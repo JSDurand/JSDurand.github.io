@@ -186,15 +186,18 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
       var starty = height/4;
       var stepx  = 2*width/15;
       var stepy  = 2*height/8;
-      var invbrick_one = brick(startx+100, starty+stepy/2, stepx/3, stepy/4, 0.9);
-      // var invbrick_two = brick(startx, starty-stepy/2, stepx/3, stepy/4, 0.9);
-      // var invbrick_three = brick(startx+stepx, starty+stepy, stepx/3, stepy/4, 0.9);
-      // var invbrick_four = brick(startx-stepx, starty+stepy, stepx/3, stepy/4, 0.9);
-      invbrick_one.invisible = true;
-      // invbrick_two.invisible = true;
-      // invbrick_three.invisible = true;
-      // invbrick_four.invisible = true;
+      var invbrick_one         = brick(startx+100, starty+stepy/2, stepx/3, stepy/4, 0.9);
+      var invbrick_two         = obstacles(startx, starty-stepy/2, stepx/3, stepy/4, 0.9);
+      var invbrick_three       = obstacles(startx+stepx, starty+stepy, stepx/3, stepy/4, 0.9);
+      var invbrick_four        = obstacles(startx-stepx, starty+stepy, stepx/3, stepy/4, 0.9);
+      invbrick_one.invisible   = true;
+      invbrick_two.invisible   = true;
+      invbrick_three.invisible = true;
+      invbrick_four.invisible  = true;
       mygame.envs.bricks.push(invbrick_one);
+      mygame.envs.obs.push(invbrick_two);
+      mygame.envs.obs.push(invbrick_three);
+      mygame.envs.obs.push(invbrick_four);
       mygame.envs.bricks.push(bomb(width*2/3, height*2/3, 50));
 
       var rotbrick = rotationBrick(width/3,height*2/3,200,30);

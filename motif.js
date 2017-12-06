@@ -291,6 +291,7 @@ mygame.motif = function (joueur, collidables) {
           bris.splice(j, 1);
         } else {
           bris[j].life--;
+          // alert('wrong');
         }
         if (coli.has_effect) {
           coli.dealEffect();

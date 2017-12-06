@@ -107,7 +107,7 @@ mygame.laser_ball = function (x, y, r, vx, vy) {
     setTimeoutWithClosure(stopLaserBall, temp_ball, 1500);
     for (var i = mygame.envs.bricks.length - 1; i >= 0; i--) {
       var bri = mygame.envs.bricks[i];
-      if (abs(bri.midX() - x) < bri.halfWidth) {
+      if (abs(bri.midX() - x) < bri.halfWidth && !bri.invisible) {
         mygame.envs.bricks[i].life--;
         // mygame.envs.bricks.splice(i, 1);
       }

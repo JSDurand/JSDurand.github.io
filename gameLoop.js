@@ -76,7 +76,7 @@ function gameLoop () {
     noStroke();
     for (var i = mygame.envs.bricks.length - 1; i >= 0; i--) {
       var bri = mygame.envs.bricks[i];
-      if (abs(bri.midX() - x) < bri.halfWidth) {
+      if (abs(bri.midX() - x) < bri.halfWidth && !bri.invisible) {
         mygame.envs.bricks.splice(i, 1);
       }
     }

@@ -21,7 +21,8 @@ function bomb(x, y, radius) {
     // this.representation = function () {};
     // this.invisible = false;
     for (var i = 0; i < 30; i++) {
-      var bullet = ball(this.midX() + 3 * newBomb.radius * cos(i*12), this.midY() + 3 * newBomb.radius*sin(i*12), 15, 0, 0);
+      var bullet = mygame.laser_ball(this.midX() + 3 * newBomb.radius * cos(i*12), this.midY() + 3 * newBomb.radius*sin(i*12), 15, 0, 0);
+      // var bullet = ball(this.midX() + 3 * newBomb.radius * cos(i*12), this.midY() + 3 * newBomb.radius*sin(i*12), 15, 0, 0);
       bullet.vx         = 20 * cos(i*12);
       bullet.vy         = 20 * sin(i*12);
       bullet.noMinus    = true; // Don't subtract score
