@@ -215,6 +215,23 @@ function levelSystem (num, diff, vshift, hshift, mysize, hBaseSize, vBaseSize) {
         // mygame.envs.unbreakables.push(unbrick(startx+4*stepx, starty+i*stepx, stepx, stepy, 0.9, -1500, 100));
         // mygame.envs.unbreakables.push(unbrick(startx+i*stepx, starty+4*stepx, stepx, stepy, 0.9, -1500, 100));
       // }
+    case 9:
+      var startx = width/3;
+      var starty = height/5;
+      var stepx  = width/10;
+      var stepy  = height/10;
+      var ws     = width/20;
+      var hs     = height/20;
+      var wall = obstacles(width/10, height*3/5, width*8/10, height/30,.9);
+      for (var i = 0; i < 16; i++) {
+        var rem = i % 4;
+        var quo = Math.floor(i/4);
+        var brick_i = brick(startx + rem * stepx, starty + quo * stepy, ws, hs, 0.9);
+        mygame.envs.bricks.push(brick_i);
+        mygame.comb_hitted_information();
+      }
+      mygame.envs.obs.push(wall);
+      break;
     default:
       console.log('NOT IMPLEMENTED!');
       break;
